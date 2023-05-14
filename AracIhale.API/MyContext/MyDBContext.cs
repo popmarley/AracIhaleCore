@@ -12,5 +12,6 @@ namespace AracIhale.API.MyContext
 
         public DbSet<IhaleListesi> IhaleListesi { get; set; }
 
+        public DbSet<Kullanici> Kullanici { get; set;}
     }
 }

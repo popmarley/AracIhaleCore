@@ -1,16 +1,13 @@
-﻿
+﻿@model AracIhale.UI.Models.VM.IhaleListesi
+
+
 <div class="container mt-5">
 	<h4 style="color:dimgrey;">İhale Genel Bilgiler</h4>
-	<form>
+	<form asp-action="Create" asp-controller="Ihale" method="post">
 		<div class="row mb-3">
 			<div class="col">
 				<label for="plaka" class="form-label">Aracın Plakası</label>
-				<select class="form-select" id="plaka">
-					<option value="" disabled selected>Seçiniz...</option>
-					<option value="1">Araç 1</option>
-					<option value="2">Araç 2</option>
-					<option value="3">Araç 3</option>
-				</select>
+				<input type="text" class="form-control" placeholder="Aracın Plakası">
 			</div>
 			<div class="col">
 				<label class="form-label">İhale Adı</label>
@@ -97,6 +94,6 @@
 <br />
 <div class="row mt-12">
 	<div class="col-md-12 d-flex justify-content-end">
-		<button class="btn btn-primary me-2">Geri Dön</button>
+		<a asp-action="AracListeleme" asp-controller="Ihale" class="btn btn-primary me-2">Geri Dön</a>
 	</div>
 </div>

@@ -57,67 +57,7 @@ namespace AracIhale.UI.Controllers
 
 
 
-        //public IActionResult Index()
-        //{
-        //    List<IhaleListesi> ihaleler = new List<IhaleListesi>();
-        //    return View(ihaleler);
-        //}
-
-        //[HttpGet]
-        //public IActionResult Create()
-        //{
-        //    return View();
-        //}
-
-        //[HttpPost]
-        //public async Task<IActionResult> Create(IhaleListesi ihale)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //     var hede=   await _apiGateway.CreateIhale(ihale);
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(ihale);
-        //}
-
-        //    [HttpGet]
-        //    public async Task<IActionResult> Edit(int id)
-        //    {
-        //        var ihale = await _apiGateway.GetIhaleById(id);
-        //        if (ihale == null)
-        //        {
-        //            return NotFound();
-        //        }
-        //        return View(ihale);
-        //    }
-
-        //    [HttpPost]
-        //    public async Task<IActionResult> Edit(int id, IhaleListesi ihale)
-        //    {
-        //        if (id != ihale.IhaleID)
-        //        {
-        //            return NotFound();
-        //        }
-
-        //        if (ModelState.IsValid)
-        //        {
-        //            await _apiGateway.UpdateIhale(ihale);
-        //            return RedirectToAction(nameof(Index));
-        //        }
-        //        return View(ihale);
-        //    }
-
-        //    [HttpPost]
-        //    public async Task<IActionResult> Delete(int id)
-        //    {
-        //        var ihale = await _apiGateway.GetIhaleById(id);
-        //        if (ihale == null)
-        //        {
-        //            return NotFound();
-        //        }
-        //        await _apiGateway.DeleteIhale(ihale.IhaleID);
-        //        return RedirectToAction(nameof(Index));
-        //    }
+        
 
 
     }

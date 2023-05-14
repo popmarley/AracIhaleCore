@@ -28,8 +28,8 @@ namespace AracIhale
         {
             services.AddControllersWithViews();
            services.AddScoped<APIGateway>();
-
-        }
+			services.AddHttpClient();
+		}
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -52,7 +52,7 @@ namespace AracIhale
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Ihale}/{action=Index}/{id?}");
+                    pattern: "{controller=Login}/{action=Login}/{id?}");
             });
         }
     }
