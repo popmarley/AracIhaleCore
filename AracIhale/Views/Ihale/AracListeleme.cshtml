@@ -56,20 +56,41 @@
                     @Html.DisplayFor(modelItem => item.IhaleAdi)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.BireyselKurumsalID)
+                    @if (item.BireyselKurumsalID == 1)
+                    {
+                        @:Bireysel
+                    }
+                    else if (item.BireyselKurumsalID == 2)
+                    {
+                        @:Kurumsal
+                    }
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IhaleBaslangicTarihi)
+                    @item.IhaleBaslangicTarihi.ToString("dd/MM/yyyy")
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IhaleBitisTarihi)
+                    @item.IhaleBitisTarihi.ToString("dd/MM/yyyy")
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IhaleStatuID)
+                    @switch (item.IhaleStatuID)
+                    {
+                        case 1:
+                            @:Başlamadı
+                            break;
+                        case 2:
+                            @:Başladı
+                            break;
+                        case 3:
+                            @:Bitti
+                            break;
+                        case 4:
+                            @:İptal
+                            break;
+                    }
                 </td>
                 <td>
                     <a href="#" class="btn btn-success me-2">Güncelle</a>
-                    <a href="#" class="btn btn-success me-2">Sil</a>
+                    <a href="@Url.Action("Delete", "Ihale", new { id = item.IhaleID })" class="btn btn-danger me-2">Sil</a>
                 </td>
             </tr>
             index++;

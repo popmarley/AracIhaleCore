@@ -80,6 +80,17 @@ namespace AracIhale.UI
 
             return ihale;
         }
+
+        public async Task<bool> DeleteIhale(int id)
+        {
+            HttpResponseMessage response = await httpClient.DeleteAsync($"{url}/{id}");
+            return response.IsSuccessStatusCode;
+        }
+
+
+
+
+
         //public List<IhaleListesi> ListIhale()
         //{
         //    List<IhaleListesi> ihale = new List<IhaleListesi>();
@@ -149,7 +160,7 @@ namespace AracIhale.UI
 
         //        return ihale;
         //    }
-       }
+    }
     }
 
 
