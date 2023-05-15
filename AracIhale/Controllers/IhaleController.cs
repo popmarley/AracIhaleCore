@@ -55,11 +55,6 @@ namespace AracIhale.UI.Controllers
             }
         }
 
-
-
-        
-
-
     }
 }
     

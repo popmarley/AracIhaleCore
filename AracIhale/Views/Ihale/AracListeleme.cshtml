@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<AracIhale.UI.Models.VM.IhaleListesi>
 @{
     int index = 1;
+    int sayac = 1;
 }
 
 <form class="bg-white rounded p-3">
@@ -100,5 +101,67 @@
 <div class="row mt-12">
     <div class="col-md-12 d-flex justify-content-end">
         <a asp-action="AracIhaleOlusturma" asp-controller="Ihale" class="btn btn-success me-2">Yeni Oluştur</a>
+    </div>
+</div>
+<table class="table">
+    <h4 style="color:dimgrey;">İhale Araç Listesi</h4>
+    <thead>
+        <tr>
+            <th>İhale Numarası</th>
+            <th>Araç Markası</th>
+            <th>Modeli</th>
+            <th>Bireysel/Kurumsal</th>
+            <th>Statüsü</th>
+            <th>İhale Başlangıç Fiyatı</th>
+            <th>Mininum Alım Fiyatı</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@sayac</td>
+                <td>@*@item.AracMarkaAdi*@</td>
+                <td>@*@item.AracModelAdi*@</td>
+                <td>
+                    @if (item.BireyselKurumsalID == 1)
+                    {
+                        @:Bireysel
+                    }
+                    else if (item.BireyselKurumsalID == 2)
+                    {
+                        @:Kurumsal
+                    }
+                </td>
+                <td>
+                    @switch (item.IhaleStatuID)
+                    {
+                        case 1:
+                            @:Başlamadı
+                            break;
+                        case 2:
+                            @:Başladı
+                            break;
+                        case 3:
+                            @:Bitti
+                            break;
+                        case 4:
+                            @:İptal
+                            break;
+                    }
+                </td>
+                <td>@item.IhaleBaslangicFiyati</td>
+                <td>@item.MinimumAlimFiyati</td>
+                <td></td>
+            </tr>
+            sayac++;
+        }
+    </tbody>
+</table>
+<br />
+<div class="row mt-12">
+    <div class="col-md-12 d-flex justify-content-end">
+        <a asp-action="AracListeleme" asp-controller="Ihale" class="btn btn-primary me-2">Geri Dön</a>
     </div>
 </div>
