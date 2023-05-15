@@ -29,6 +29,12 @@ namespace AracIhale
             services.AddControllersWithViews();
            services.AddScoped<APIGateway>();
 			services.AddHttpClient();
+			services.AddAuthentication("CookieAuthentication")
+		.AddCookie("CookieAuthentication", config =>
+		{
+			config.Cookie.Name = "UserLoginCookie";
+			config.LoginPath = "/Login/Login";
+		});
 		}
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,7 +52,9 @@ namespace AracIhale
 
             app.UseRouting();
 
-            app.UseAuthorization();
+			app.UseAuthentication();
+
+			app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

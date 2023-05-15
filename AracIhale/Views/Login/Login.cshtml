@@ -30,23 +30,21 @@
 						<h3 class="mb-4 text-center">Kullanıcı Giris Ekranı</h3>
 						<form action="/Login/Login" method="post" class="signin-form">
 							<div class="form-group">
-								<input type="text" name="KullaniciAdi" class="form-control" placeholder="Kullanıcı Adı" required>
+								<input type="text" name="KullaniciAdi" class="form-control" placeholder="Kullanıcı Adı" value="@Context.Request.Cookies["username"]" required>
 							</div>
 							<div class="form-group">
 								<input id="password-field" type="password" name="Sifre" class="form-control" placeholder="Sifre" required>
 								<span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
 							</div>
 							<div class="form-group">
-								<button type="submit" class="form-control btn btn-primary submit px-3">GİRİŞ Yap</button>
+								<label class="checkbox-wrap checkbox-primary">
+									Beni Hatırla
+									<input type="checkbox" name="rememberMe" value="true">
+									<span class="checkmark"></span>
+								</label>
 							</div>
-							<div class="form-group d-md-flex">
-								<div class="w-50">
-									<label class="checkbox-wrap checkbox-primary">
-										Beni Hatırla
-										<input type="checkbox" checked>
-										<span class="checkmark"></span>
-									</label>
-								</div>
+							<div class="form-group">
+								<button type="submit" class="form-control btn btn-primary submit px-3">GİRİŞ Yap</button>
 							</div>
 						</form>
 						<p class="w-100 text-center">&mdash; Veya &mdash;</p>
@@ -67,4 +65,19 @@
 
 </body>
 </html>
+
+<script>
+	$(document).ready(function () {
+		var username = getCookie("username");
+		if (username) {
+			$('input[name="KullaniciAdi"]').val(username);
+		}
+	});
+
+	function getCookie(name) {
+		var value = "; " + document.cookie;
+		var parts = value.split("; " + name + "=");
+		if (parts.length == 2) return parts.pop().split(";").shift();
+	}
+</script>
 
