@@ -27,15 +27,27 @@ namespace AracIhale
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-           services.AddScoped<APIGateway>();
+            services.AddScoped<APIGateway>();
+            services.AddHttpContextAccessor();
+			services.AddDistributedMemoryCache(); // MemoryCache hizmetini ekliyoruz.
+			services.AddSession(options =>
+			{
+				options.IdleTimeout = TimeSpan.FromMinutes(30); // Oturum süresini 30 dakika olarak belirliyoruz.
+				options.Cookie.HttpOnly = true;
+				options.Cookie.IsEssential = true;
+			});
+
+
 			services.AddHttpClient();
-			services.AddAuthentication("CookieAuthentication")
-		.AddCookie("CookieAuthentication", config =>
-		{
-			config.Cookie.Name = "UserLoginCookie";
-			config.LoginPath = "/Login/Login";
-		});
-		}
+           
+            
+            services.AddAuthentication("CookieAuthentication")
+        .AddCookie("CookieAuthentication", config =>
+        {
+            config.Cookie.Name = "UserLoginCookie";
+            config.LoginPath = "/Login/Login";
+        });
+        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -50,11 +62,13 @@ namespace AracIhale
             }
             app.UseStaticFiles();
 
+            app.UseSession();
+
             app.UseRouting();
 
-			app.UseAuthentication();
+            app.UseAuthentication();
 
-			app.UseAuthorization();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

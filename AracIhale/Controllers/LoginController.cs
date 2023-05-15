@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Net.Http.Json;
 using Microsoft.AspNetCore.Http;
 using System;
+using AracIhale.UI.Models.Extension;
 
 namespace AracIhale.UI.Controllers
 {
@@ -45,6 +46,8 @@ namespace AracIhale.UI.Controllers
 					options.Expires = DateTime.Now.AddDays(30); // Çerezin 30 gün boyunca geçerli olmasını sağlıyoruz
 					Response.Cookies.Append("username", model.KullaniciAdi, options);
 				}
+				
+				HttpContext.Session.MySessionSet("Ad", model.KullaniciAdi);// Kullanıcı adını bir Session'a kaydediyoruz
 
 				// Giriş başarılı oldu, kullanıcıyı Ihale/AracListeleme sayfasına yönlendir
 				return RedirectToAction("AracListeleme", "Ihale");
