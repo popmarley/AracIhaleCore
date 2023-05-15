@@ -59,5 +59,15 @@ namespace AracIhale.UI.Controllers
 				return View(model);
 			}
 		}
+
+
+		public IActionResult Logout()
+		{
+			//Response.Cookies.Delete("username"); // Kullanıcı adı çerezini siliyoruz
+			//HttpContext.Session.Clear(); // Tüm oturum verilerini siliyoruz
+
+			return RedirectToAction("Login"); // Kullanıcıyı giriş sayfasına yönlendiriyoruz
+		}
+
 	}
 }
