@@ -21,15 +21,15 @@ namespace AracIhale.API.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Login(Kullanici kullanici)
 		{
-			var user = await _context.Kullanici.FirstOrDefaultAsync(u => u.KullaniciAdi == kullanici.KullaniciAdi && u.Sifre == kullanici.Sifre);
+            var user = await _context.Kullanici
+                 .FirstOrDefaultAsync(u => u.KullaniciAdi == kullanici.KullaniciAdi && u.Sifre == kullanici.Sifre);
 
-			if (user == null)
-			{
-				return Unauthorized(); // Kullanıcı adı veya şifre yanlışsa 401 Unauthorized döner
-			}
+            if (user == null)
+            {
+                return Unauthorized(); // Kullanıcı adı veya şifre yanlışsa 401 Unauthorized döner
+            }
 
-			// Burada bir token oluşturabilir ve dönebiliriz, bu örnekte basitlik adına doğrudan OK dönüyoruz
-			return Ok();
-		}
+            return Ok(user);
+        }
 	}
 }

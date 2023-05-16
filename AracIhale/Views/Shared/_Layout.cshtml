@@ -6,6 +6,7 @@
 
 @{
 	var user = HttpContextAccessor.HttpContext?.Session.MySessionGet<string>("Ad");
+	var rolID = HttpContextAccessor.HttpContext?.Session.MySessionGet<int>("RolID");
 }
 
 
@@ -66,7 +67,10 @@
 				</div>
 				<div class="navbar-nav w-100">
 					<a href="/Ihale/AracListeleme" class="nav-item nav-link"><i class="fa fa-list me-2"></i>İhale Listeleme</a>
-					<a href="/Ihale/AracIhaleOlusturma" class="nav-item nav-link"><i class="fa fa-th me-2"></i>İhale Teklif Listesi</a>
+					@if (rolID == 1 || rolID == 3)
+					{
+						<a href="/Ihale/AracIhaleOlusturma" class="nav-item nav-link"><i class="fa fa-th me-2"></i>İhale Teklif Listesi</a>
+					}
 				</div>
 			</nav>
 		</div>

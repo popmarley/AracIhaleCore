@@ -39,6 +39,10 @@ namespace AracIhale.UI.Controllers
 
 			if (response.IsSuccessStatusCode)
 			{
+                Kullanici user = await response.Content.ReadFromJsonAsync<Kullanici>();
+
+				HttpContext.Session.MySessionSet("RolID", user.RolID);
+
 				if (rememberMe)
 				{
 					// Kullanıcı adını çerezlere kaydediyoruz
