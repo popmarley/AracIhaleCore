@@ -28,7 +28,12 @@ namespace AracIhale.UI.Controllers
 			return View();
 		}
 
-		[HttpGet]
+        public IActionResult AracIhaleTeklifVerme()
+        {
+            return View();
+        }
+
+        [HttpGet]
         public IActionResult Create()
         {
             IhaleListesi ihaleler = new IhaleListesi();
@@ -54,7 +59,7 @@ namespace AracIhale.UI.Controllers
                 return View("Error");
             }
         }
-
+        
     }
 }
     

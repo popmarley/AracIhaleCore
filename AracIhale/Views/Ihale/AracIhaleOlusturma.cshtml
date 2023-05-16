@@ -1,99 +1,73 @@
-﻿@model AracIhale.UI.Models.VM.IhaleListesi
+﻿@model IEnumerable<AracIhale.UI.Models.VM.IhaleListesi>
 
+@{
+	int sayac = 1;
+}
 
-<div class="container mt-5">
-	<h4 style="color:dimgrey;">İhale Genel Bilgiler</h4>
-	<form asp-action="Create" asp-controller="Ihale" method="post">
-		<div class="row mb-3">
-			<div class="col">
-				<label for="plaka" class="form-label">Aracın Plakası</label>
-				<input type="text" class="form-control" placeholder="Aracın Plakası">
-			</div>
-			<div class="col">
-				<label class="form-label">İhale Adı</label>
-				<input type="text" class="form-control" placeholder="İhale Adı">
-			</div>
-			<div class="col">
-				<label class="form-label">İhale Başlangıç Fiyatı</label>
-				<input type="text" class="form-control" placeholder="İhale Başlangıç Fiyatı">
-			</div>
-			<div class="col">
-				<label class="form-label">Minimum Alım Fiyatı</label>
-				<input type="text" class="form-control" placeholder="Minimum Alım Fiyatı">
-			</div>
-		</div>
-		<div class="row mb-3">
-			<div class="col-md-3">
-				<label for="bireyselkurumsal" class="form-label">Bireysel/Kurumsal</label>
-				<select class="form-select" id="bireyselkurumsal">
-					<option value="" disabled selected>Seçiniz...</option>
-					<option value="1">Bireysel</option>
-					<option value="2">Kurumsal</option>
-				</select>
-			</div>
-			<div class="col-md-3">
-				<label class="form-label">Şirket Adı</label>
-				<input type="text" class="form-control" placeholder="Şirket Adı">
-			</div>
-			<div class="col-md-3">
-				<label for="ihaleStatusu" class="form-label">İhale Statüsü</label>
-				<select class="form-select" id="ihaleStatusu">
-					<option value="" disabled selected>Seçiniz...</option>
-					<option value="acik">Açık İhale</option>
-					<option value="kapali">Kapalı İhale</option>
-					<option value="iptal">İptal Edilmiş İhale</option>
-					<option value="tamamlanan">Tamamlanan İhale</option>
-				</select>
-			</div>
-		</div>
-		<div class="row mb-3">
-			<div class="col">
-				<label for="IhaleBaslangicTarihi" class="form-label">İhale Başlangıç Tarihi</label>
-				<input type="date" class="form-control">
-			</div>
-			<div class="col">
-				<label class="form-label">İhale Bitiş Tarihi</label>
-				<input type="date" class="form-control">
-			</div>
-			<div class="col">
-				<label class="form-label">İhale Başlangıç Saati</label>
-				<input type="time" class="form-control">
-			</div>
-			<div class="col">
-				<label class="form-label">İhale Bitiş Saati</label>
-				<input type="time" class="form-control">
-			</div>
-		</div>
-		<br />
-		<div class="col-md-12 d-flex justify-content-end">
-			<button type="submit" class="btn btn-primary mb-5">İhale Oluştur</button>
-		</div>
-	</form>
-
-</div>
-<br />
 <table class="table">
-	<h4 style="color:dimgrey;">İhale Araç Listesi</h4>
+	<h4 style="color:dimgrey;">İhale Teklif Listesi</h4>
 	<thead>
 		<tr>
-			<th>Araç ID</th>
+			<th>İhale Numarası</th>
 			<th>Araç Markası</th>
 			<th>Modeli</th>
 			<th>Bireysel/Kurumsal</th>
 			<th>Statüsü</th>
-			<th>Kaydeden Kullanıcı</th>
+			<th>Teklif Veren Kullanıcı</th>
 			<th>Kaydetme Zamanı</th>
-			<th>Fiyatı</th>
+			<th>İhale Başlangıç Fiyatı</th>
+			<th>Mininum Alım Fiyatı</th>
+			<th>Teklif Fiyatı</th>
+			<th>Aksiyon</th>
 			<th></th>
 		</tr>
 	</thead>
 	<tbody>
-		<!-- buraya araç listesi dinamik olarak gelecek -->
+     @*   @foreach (var item in Model)*@
+        {
+            <tr>
+                <td>@sayac</td>
+                @*<td>@item.AracOzellik.AracMarka.MarkaAdi</td>
+            <td>@item.AracOzellik.AracModel.ModelAdi</td>*@
+                <td>
+                   @* @if (item.BireyselKurumsalID == 1)
+                    {
+                        @:Bireysel
+                    }
+                    else if (item.BireyselKurumsalID == 2)
+                    {
+                        @:Kurumsal
+                    }*@
+                </td>
+                <td>
+                   @* @switch (item.IhaleStatuID)
+                    {
+                        case 1:
+                            @:Başlamadı
+                            break;
+                        case 2:
+                            @:Başladı
+                            break;
+                        case 3:
+                            @:Bitti
+                            break;
+                        case 4:
+                            @:İptal
+                            break;*@
+                    }
+                </td>
+               @* <td>@item.KullaniciAdi</td>
+                <td>@item.TeklifTarihi</td>*@
+               @* <td>@item.IhaleBaslangicFiyati ₺</td>
+                <td>@item.MinimumAlimFiyati ₺</td>*@
+                @*<td>@item.TeklifFiyati ₺</td>*@
+               @* <td>*@
+                   @* <a asp-action="AracIhaleOlusturma" asp-controller="Ihale" class="btn btn-success me-2">Onayla</a>
+                    <a asp-action="AracIhaleOlusturma" asp-controller="Ihale" class="btn btn-danger me-2">Reddet</a>*@
+                @*</td>
+                <td></td>*@
+            </tr>
+            sayac++;
+        }
 	</tbody>
 </table>
-<br />
-<div class="row mt-12">
-	<div class="col-md-12 d-flex justify-content-end">
-		<a asp-action="AracListeleme" asp-controller="Ihale" class="btn btn-primary me-2">Geri Dön</a>
-	</div>
-</div>

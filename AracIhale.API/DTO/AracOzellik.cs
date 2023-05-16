@@ -35,9 +35,9 @@ namespace AracIhale.API.DTO
 
 		public virtual ICollection<Araclar> Araclars { get; set; }
 
-		//public virtual AracMarka AracMarka { get; set; }
+		public virtual AracMarka AracMarka { get; set; }
 
-		//public virtual AracModel AracModel { get; set; }
+		public virtual AracModel AracModel { get; set; }
 
 		//public virtual GovdeTipi GovdeTipi { get; set; }
 

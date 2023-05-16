@@ -4,57 +4,22 @@ using AracIhale.API.MyContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AracIhale.API.Migrations
 {
     [DbContext(typeof(MyDBContext))]
-    partial class MyDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230516150115_five")]
+    partial class five
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.0");
-
-            modelBuilder.Entity("AracIhale.API.DTO.AracMarka", b =>
-                {
-                    b.Property<int>("MarkaID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("MarkaAdi")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("MarkaID");
-
-                    b.ToTable("AracMarkas");
-                });
-
-            modelBuilder.Entity("AracIhale.API.DTO.AracModel", b =>
-                {
-                    b.Property<int>("AracModelID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<int?>("AracMarkaID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ModelAdi")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("AracModelID");
-
-                    b.HasIndex("AracMarkaID");
-
-                    b.ToTable("AracModels");
-                });
 
             modelBuilder.Entity("AracIhale.API.DTO.AracOzellik", b =>
                 {
@@ -93,10 +58,6 @@ namespace AracIhale.API.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("AracOzellikID");
-
-                    b.HasIndex("AracMarkaID");
-
-                    b.HasIndex("AracModelID");
 
                     b.ToTable("AracOzellik");
                 });
@@ -392,30 +353,6 @@ namespace AracIhale.API.Migrations
                     b.ToTable("Rol");
                 });
 
-            modelBuilder.Entity("AracIhale.API.DTO.AracModel", b =>
-                {
-                    b.HasOne("AracIhale.API.DTO.AracMarka", "AracMarka")
-                        .WithMany("AracModels")
-                        .HasForeignKey("AracMarkaID");
-
-                    b.Navigation("AracMarka");
-                });
-
-            modelBuilder.Entity("AracIhale.API.DTO.AracOzellik", b =>
-                {
-                    b.HasOne("AracIhale.API.DTO.AracMarka", "AracMarka")
-                        .WithMany("AracOzelliks")
-                        .HasForeignKey("AracMarkaID");
-
-                    b.HasOne("AracIhale.API.DTO.AracModel", "AracModel")
-                        .WithMany("AracOzelliks")
-                        .HasForeignKey("AracModelID");
-
-                    b.Navigation("AracMarka");
-
-                    b.Navigation("AracModel");
-                });
-
             modelBuilder.Entity("AracIhale.API.DTO.Araclar", b =>
                 {
                     b.HasOne("AracIhale.API.DTO.AracOzellik", "AracOzellik")
@@ -492,18 +429,6 @@ namespace AracIhale.API.Migrations
                     b.Navigation("BireyselKurumsal");
 
                     b.Navigation("Rol");
-                });
-
-            modelBuilder.Entity("AracIhale.API.DTO.AracMarka", b =>
-                {
-                    b.Navigation("AracModels");
-
-                    b.Navigation("AracOzelliks");
-                });
-
-            modelBuilder.Entity("AracIhale.API.DTO.AracModel", b =>
-                {
-                    b.Navigation("AracOzelliks");
                 });
 
             modelBuilder.Entity("AracIhale.API.DTO.AracOzellik", b =>

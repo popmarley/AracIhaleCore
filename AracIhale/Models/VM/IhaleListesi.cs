@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace AracIhale.UI.Models.VM
@@ -34,9 +35,18 @@ namespace AracIhale.UI.Models.VM
 		[StringLength(75)]
 		public string MinimumAlimFiyati { get; set; } = "";
 
+        public int? AracOzellikID { get; set; }
+
+        public virtual Araclar Araclar { get; set; }
+
+        public virtual AracOzellik AracOzellik { get; set; }
+
+        public virtual BireyselKurumsal BireyselKurumsal { get; set; }
+
+        public virtual IhaleStatu IhaleStatu { get; set; }
+        public virtual ICollection<BireyselAracTeklif> BireyselAracTeklifs { get; set; }
 
 
 
-
-	}
+    }
 }

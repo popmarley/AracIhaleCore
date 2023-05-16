@@ -90,30 +90,28 @@
                     }
                 </td>
                 <td>
-                    <a href="#" class="btn btn-success me-2">Güncelle</a>
-                    <a href="@Url.Action("Delete", "Ihale", new { id = item.IhaleID })" class="btn btn-danger me-2">Sil</a>
+                    <a href="#" class="btn btn-success me-2">Düzenle</a>
+                    <a href="@Url.Action("Delete", "Ihale", new { id = item.IhaleID })" class="btn btn-danger me-2" onclick="return confirm('Silmek istediğinize emin misiniz?')">Sil</a>
+                    @*<a href="#" class="btn btn-danger me-2">Sil</a>*@
                 </td>
             </tr>
             index++;
         }
     </tbody>
 </table>
-<div class="row mt-12">
-    <div class="col-md-12 d-flex justify-content-end">
-        <a asp-action="AracIhaleOlusturma" asp-controller="Ihale" class="btn btn-success me-2">Yeni Oluştur</a>
-    </div>
-</div>
+<br />
 <table class="table">
     <h4 style="color:dimgrey;">İhale Araç Listesi</h4>
     <thead>
         <tr>
             <th>İhale Numarası</th>
-            <th>Araç Markası</th>
-            <th>Modeli</th>
+            @*<th>Araç Markası</th>
+            <th>Modeli</th>*@
             <th>Bireysel/Kurumsal</th>
             <th>Statüsü</th>
             <th>İhale Başlangıç Fiyatı</th>
             <th>Mininum Alım Fiyatı</th>
+            <th>Aksiyon</th>
             <th></th>
         </tr>
     </thead>
@@ -122,8 +120,8 @@
         {
             <tr>
                 <td>@sayac</td>
-                <td>@*@item.AracMarkaAdi*@</td>
-                <td>@*@item.AracModelAdi*@</td>
+                @*<td>@item.AracOzellik.AracMarka.MarkaAdi</td>
+                <td>@item.AracOzellik.AracModel.ModelAdi</td>*@
                 <td>
                     @if (item.BireyselKurumsalID == 1)
                     {
@@ -151,17 +149,13 @@
                             break;
                     }
                 </td>
-                <td>@item.IhaleBaslangicFiyati</td>
-                <td>@item.MinimumAlimFiyati</td>
+                <td>@item.IhaleBaslangicFiyati ₺</td>
+                <td>@item.MinimumAlimFiyati ₺</td>
+                <td><a asp-action="AracIhaleTeklifVerme" asp-controller="Ihale" class="btn btn-success me-2">Teklif Ver</a></td>
                 <td></td>
             </tr>
             sayac++;
         }
     </tbody>
 </table>
-<br />
-<div class="row mt-12">
-    <div class="col-md-12 d-flex justify-content-end">
-        <a asp-action="AracListeleme" asp-controller="Ihale" class="btn btn-primary me-2">Geri Dön</a>
-    </div>
-</div>
+

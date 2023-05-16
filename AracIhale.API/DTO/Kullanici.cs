@@ -62,13 +62,13 @@ namespace AracIhale.API.DTO
 		public virtual ICollection<Araclar> Araclars { get; set; }
 
 		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-		//public virtual ICollection<BireyselAracTeklif> BireyselAracTeklifs { get; set; }
+		public virtual ICollection<BireyselAracTeklif> BireyselAracTeklifs { get; set; }
 
 		public virtual BireyselKurumsal BireyselKurumsal { get; set; }
 
 		//public virtual FirmaBilgisi FirmaBilgisi { get; set; }
 
-		//public virtual Rol Rol { get; set; }
+		public virtual Rol Rol { get; set; }
 
 
 		//public virtual ICollection<KurumsalUyeOnay> KurumsalUyeOnays { get; set; }

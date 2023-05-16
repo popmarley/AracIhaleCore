@@ -1,0 +1,52 @@
+﻿<div class="bg-white rounded p-3">
+	<h4 style="color:dimgrey; ">İhaleye Teklif Verme</h4>
+
+	<div class="bg-white row">
+		<div class="col-md-4 form-group">
+			<label for="IhaleID">İhale Numarası</label>
+			<input type="text" class="form-control" id="IhaleID" name="IhaleID">
+		</div>
+		<div class="col-md-4 form-group">
+			<label for="AracMarkasi">Araç Markası</label>
+			<input type="text" class="form-control" id="AracMarkasi" name="AracMarkasi">
+		</div>
+		<div class="col-md-4 form-group">
+			<label for="AracModel">Modeli</label>
+			<input type="text" class="form-control" id="AracModel" name="AracModel">
+		</div>
+	</div>
+
+	<div class="bg-white row">
+		<div class="col-md-4 form-group">
+			<label for="BireyselKurumsal">Bireysel/Kurumsal</label>
+			<input type="text" class="form-control" id="BireyselKurumsal" name="BireyselKurumsal">
+		</div>
+		<div class="col-md-4 form-group">
+			<label for="IhaleStatu">Statüsü</label>
+			<input type="text" class="form-control" id="IhaleStatu" name="IhaleStatu">
+		</div>
+		<div class="col-md-4 form-group">
+			<label for="KullaniciID">Teklif Veren Kullanıcı</label>
+			<input type="text" class="form-control" id="KullaniciID" name="KullaniciID">
+		</div>
+	</div>
+
+	<div class="bg-white row">
+		<div class="col-md-4 form-group">
+			<label for="IhaleBaslangicFiyati">İhale Başlangıç Fiyatı</label>
+			<input type="text" class="form-control" id="IhaleBaslangicFiyati" name="IhaleBaslangicFiyati">
+		</div>
+		<div class="col-md-4 form-group">
+			<label for="MinimumAlimFiyati">Mininum Alım Fiyatı</label>
+			<input type="text" class="form-control" id="MinimumAlimFiyati" name="MinimumAlimFiyati">
+		</div>
+		<div class="col-md-4 form-group">
+			<label for="TeklifFiyati">Teklif Fiyatı</label>
+			<input type="text" class="form-control" id="TeklifFiyati" name="TeklifFiyati">
+		</div>
+	</div>
+</div>
+<br />
+	<div class="d-grid gap-2 mt-4 d-flex justify-content-end">
+		<a asp-action="AracListeleme" asp-controller="Ihale" class="btn btn-primary">Vazgeç</a>
+	</div>

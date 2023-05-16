@@ -4,57 +4,22 @@ using AracIhale.API.MyContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AracIhale.API.Migrations
 {
     [DbContext(typeof(MyDBContext))]
-    partial class MyDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230515232656_four")]
+    partial class four
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.0");
-
-            modelBuilder.Entity("AracIhale.API.DTO.AracMarka", b =>
-                {
-                    b.Property<int>("MarkaID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("MarkaAdi")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("MarkaID");
-
-                    b.ToTable("AracMarkas");
-                });
-
-            modelBuilder.Entity("AracIhale.API.DTO.AracModel", b =>
-                {
-                    b.Property<int>("AracModelID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<int?>("AracMarkaID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ModelAdi")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("AracModelID");
-
-                    b.HasIndex("AracMarkaID");
-
-                    b.ToTable("AracModels");
-                });
 
             modelBuilder.Entity("AracIhale.API.DTO.AracOzellik", b =>
                 {
@@ -94,11 +59,7 @@ namespace AracIhale.API.Migrations
 
                     b.HasKey("AracOzellikID");
 
-                    b.HasIndex("AracMarkaID");
-
-                    b.HasIndex("AracModelID");
-
-                    b.ToTable("AracOzellik");
+                    b.ToTable("AracOzelliks");
                 });
 
             modelBuilder.Entity("AracIhale.API.DTO.Araclar", b =>
@@ -175,39 +136,7 @@ namespace AracIhale.API.Migrations
 
                     b.HasIndex("KullaniciID");
 
-                    b.ToTable("Araclar");
-                });
-
-            modelBuilder.Entity("AracIhale.API.DTO.BireyselAracTeklif", b =>
-                {
-                    b.Property<int>("TeklifID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<int?>("IhaleID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("IhaleListesiIhaleID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("KullaniciID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TeklifFiyati")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<DateTime?>("TeklifTarihi")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("TeklifID");
-
-                    b.HasIndex("IhaleListesiIhaleID");
-
-                    b.HasIndex("KullaniciID");
-
-                    b.ToTable("BireyselAracTeklif");
+                    b.ToTable("Araclars");
                 });
 
             modelBuilder.Entity("AracIhale.API.DTO.BireyselKurumsal", b =>
@@ -288,25 +217,7 @@ namespace AracIhale.API.Migrations
 
                     b.HasIndex("BireyselKurumsalID");
 
-                    b.HasIndex("IhaleStatuID");
-
                     b.ToTable("IhaleListesi");
-                });
-
-            modelBuilder.Entity("AracIhale.API.DTO.IhaleStatu", b =>
-                {
-                    b.Property<int>("IhaleStatuID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("IhaleStatuAdi")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("IhaleStatuID");
-
-                    b.ToTable("IhaleStatu");
                 });
 
             modelBuilder.Entity("AracIhale.API.DTO.Kullanici", b =>
@@ -389,31 +300,7 @@ namespace AracIhale.API.Migrations
 
                     b.HasKey("RolID");
 
-                    b.ToTable("Rol");
-                });
-
-            modelBuilder.Entity("AracIhale.API.DTO.AracModel", b =>
-                {
-                    b.HasOne("AracIhale.API.DTO.AracMarka", "AracMarka")
-                        .WithMany("AracModels")
-                        .HasForeignKey("AracMarkaID");
-
-                    b.Navigation("AracMarka");
-                });
-
-            modelBuilder.Entity("AracIhale.API.DTO.AracOzellik", b =>
-                {
-                    b.HasOne("AracIhale.API.DTO.AracMarka", "AracMarka")
-                        .WithMany("AracOzelliks")
-                        .HasForeignKey("AracMarkaID");
-
-                    b.HasOne("AracIhale.API.DTO.AracModel", "AracModel")
-                        .WithMany("AracOzelliks")
-                        .HasForeignKey("AracModelID");
-
-                    b.Navigation("AracMarka");
-
-                    b.Navigation("AracModel");
+                    b.ToTable("Rols");
                 });
 
             modelBuilder.Entity("AracIhale.API.DTO.Araclar", b =>
@@ -437,46 +324,19 @@ namespace AracIhale.API.Migrations
                     b.Navigation("Kullanici");
                 });
 
-            modelBuilder.Entity("AracIhale.API.DTO.BireyselAracTeklif", b =>
-                {
-                    b.HasOne("AracIhale.API.DTO.IhaleListesi", "IhaleListesi")
-                        .WithMany("BireyselAracTeklifs")
-                        .HasForeignKey("IhaleListesiIhaleID");
-
-                    b.HasOne("AracIhale.API.DTO.Kullanici", "Kullanici")
-                        .WithMany("BireyselAracTeklifs")
-                        .HasForeignKey("KullaniciID");
-
-                    b.Navigation("IhaleListesi");
-
-                    b.Navigation("Kullanici");
-                });
-
             modelBuilder.Entity("AracIhale.API.DTO.IhaleListesi", b =>
                 {
-                    b.HasOne("AracIhale.API.DTO.AracOzellik", "AracOzellik")
+                    b.HasOne("AracIhale.API.DTO.AracOzellik", null)
                         .WithMany("IhaleListesis")
                         .HasForeignKey("AracOzellikID");
 
-                    b.HasOne("AracIhale.API.DTO.Araclar", "Araclar")
+                    b.HasOne("AracIhale.API.DTO.Araclar", null)
                         .WithMany("IhaleListesis")
                         .HasForeignKey("AraclarAracID");
 
-                    b.HasOne("AracIhale.API.DTO.BireyselKurumsal", "BireyselKurumsal")
+                    b.HasOne("AracIhale.API.DTO.BireyselKurumsal", null)
                         .WithMany("IhaleListesis")
                         .HasForeignKey("BireyselKurumsalID");
-
-                    b.HasOne("AracIhale.API.DTO.IhaleStatu", "IhaleStatu")
-                        .WithMany("IhaleListesis")
-                        .HasForeignKey("IhaleStatuID");
-
-                    b.Navigation("Araclar");
-
-                    b.Navigation("AracOzellik");
-
-                    b.Navigation("BireyselKurumsal");
-
-                    b.Navigation("IhaleStatu");
                 });
 
             modelBuilder.Entity("AracIhale.API.DTO.Kullanici", b =>
@@ -485,25 +345,11 @@ namespace AracIhale.API.Migrations
                         .WithMany("Kullanicis")
                         .HasForeignKey("BireyselKurumsalID");
 
-                    b.HasOne("AracIhale.API.DTO.Rol", "Rol")
+                    b.HasOne("AracIhale.API.DTO.Rol", null)
                         .WithMany("Kullanicis")
                         .HasForeignKey("RolID");
 
                     b.Navigation("BireyselKurumsal");
-
-                    b.Navigation("Rol");
-                });
-
-            modelBuilder.Entity("AracIhale.API.DTO.AracMarka", b =>
-                {
-                    b.Navigation("AracModels");
-
-                    b.Navigation("AracOzelliks");
-                });
-
-            modelBuilder.Entity("AracIhale.API.DTO.AracModel", b =>
-                {
-                    b.Navigation("AracOzelliks");
                 });
 
             modelBuilder.Entity("AracIhale.API.DTO.AracOzellik", b =>
@@ -527,21 +373,9 @@ namespace AracIhale.API.Migrations
                     b.Navigation("Kullanicis");
                 });
 
-            modelBuilder.Entity("AracIhale.API.DTO.IhaleListesi", b =>
-                {
-                    b.Navigation("BireyselAracTeklifs");
-                });
-
-            modelBuilder.Entity("AracIhale.API.DTO.IhaleStatu", b =>
-                {
-                    b.Navigation("IhaleListesis");
-                });
-
             modelBuilder.Entity("AracIhale.API.DTO.Kullanici", b =>
                 {
                     b.Navigation("Araclars");
-
-                    b.Navigation("BireyselAracTeklifs");
                 });
 
             modelBuilder.Entity("AracIhale.API.DTO.Rol", b =>
