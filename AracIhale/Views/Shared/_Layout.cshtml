@@ -1,12 +1,14 @@
 ﻿@using System.Runtime.Serialization
 @using AracIhale.UI.Models.Extension;
 @using Microsoft.AspNetCore.Http
+@using AracIhale.UI.Models.Enums
 
 @inject IHttpContextAccessor HttpContextAccessor
 
 @{
 	var user = HttpContextAccessor.HttpContext?.Session.MySessionGet<string>("Ad");
 	var rolID = HttpContextAccessor.HttpContext?.Session.MySessionGet<int>("RolID");
+	var roleName = rolID.HasValue ? UserRolesHelper.GetRoleName(rolID.Value) : "Bilinmeyen";
 }
 
 
@@ -62,7 +64,7 @@
 					</div>
 					<div class="ms-3">
 						<h6 class="mb-0">@user</h6>
-						<span>Admin</span>
+						<span>@roleName</span>
 					</div>
 				</div>
 				<div class="navbar-nav w-100">
