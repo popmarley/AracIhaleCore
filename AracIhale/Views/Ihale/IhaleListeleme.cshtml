@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<AracIhale.UI.Models.VM.IhaleListesi>
 @{
-    int sayac = 1;
+    int index = 1;
 }
 
 <form class="bg-white rounded p-3" action="@Url.Action("Listele", "Ihale")" method="post">
@@ -34,18 +34,16 @@
     </div>
 </form>
 <br />
-
 <table class="table">
-    <h4 style="color:dimgrey;">İhale Araç Listesi</h4>
+    <h4 style="color:dimgrey;">İhale Listesi</h4>
     <thead>
         <tr>
             <th>İhale Numarası</th>
-            @*<th>Araç Markası</th>
-            <th>Modeli</th>*@
+            <th>İhale Adı</th>
             <th>Bireysel/Kurumsal</th>
-            <th>Statüsü</th>
-            <th>İhale Başlangıç Fiyatı</th>
-            <th>Mininum Alım Fiyatı</th>
+            <th>İhale Başlangıç</th>
+            <th>İhale Bitiş</th>
+            <th>Statü</th>
             <th>Aksiyon</th>
             <th></th>
         </tr>
@@ -54,9 +52,12 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@sayac</td>
-                @*<td>@item.AracOzellik.AracMarka.MarkaAdi</td>
-                <td>@item.AracOzellik.AracModel.ModelAdi</td>*@
+                <td>
+                    @index
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IhaleAdi)
+                </td>
                 <td>
                     @if (item.BireyselKurumsalID == 1)
                     {
@@ -66,6 +67,12 @@
                     {
                         @:Kurumsal
                     }
+                </td>
+                <td>
+                    @item.IhaleBaslangicTarihi
+                </td>
+                <td>
+                    @item.IhaleBitisTarihi
                 </td>
                 <td>
                     @switch (item.IhaleStatuID)
@@ -84,15 +91,53 @@
                             break;
                     }
                 </td>
-                <td>@item.IhaleBaslangicFiyati ₺</td>
-                <td>@item.MinimumAlimFiyati ₺</td>
                 <td>
-                    <a href="@Url.Action("TeklifVer", "IhaleTeklif", new { id = item.IhaleID })" class="btn btn-success me-2">Teklif Ver</a>
-                    </td>
-                <td></td>
+                    <a href="@Url.Action("Edit", "Ihale", new { id = item.IhaleID })" class="btn btn-success me-2">Düzenle</a>
+                    <a href="#" class="btn btn-danger me-2" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="@item.IhaleID">Sil</a>
+                </td>
             </tr>
-            sayac++;
+            index++;
         }
     </tbody>
 </table>
 
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">İhale Silme Onayı</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                İhaleyi Silmek istediğinizden emin misiniz?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hayır</button>
+                <button type="button" class="btn btn-danger" id="confirmDelete">Evet</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        var deleteId;
+
+        // Store the id of the item to delete
+        $('#deleteModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            deleteId = button.data('id');
+        });
+
+        // Handle click on "Evet" button
+        $('#confirmDelete').click(function () {
+            $.post('@Url.Action("Delete", "Ihale")', { id: deleteId })
+                .done(function () {
+                    window.location.reload();
+                })
+                .fail(function () {
+                    alert('Silme işlemi başarısız oldu.');
+                });
+        });
+    });
+</script>

@@ -34,7 +34,13 @@ namespace AracIhale.UI.Controllers
             return View();
         }
 
-        [HttpGet]
+		public async Task<IActionResult> IhaleListeleme()
+		{
+            var ihaleler = await _apiGateway.ListIhale();
+            return View(ihaleler);
+        }
+
+		[HttpGet]
         public IActionResult Create()
         {
             IhaleListesi ihaleler = new IhaleListesi();

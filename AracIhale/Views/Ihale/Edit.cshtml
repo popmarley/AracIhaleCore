@@ -2,87 +2,80 @@
 
 
 <div class="bg-white rounded p-3">
-    <h1 style="color:dimgrey;">İhale Düzenleme</h1>
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-
-                <label for="IhaleID" class="form-label">İhale Numarası</label>
-                <input asp-for="IhaleID" class="form-control" />
-                <span asp-validation-for="IhaleID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label for="IhaleAdi" class="form-label">İhale Adı</label>
-                <input asp-for="IhaleAdi" class="form-control" />
-                <span asp-validation-for="IhaleAdi" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label for="BireyselKurumsalID" class="form-label">Bireysel/Kurumsal</label>
-                <input asp-for="BireyselKurumsalID" class="form-control" />
-                <span asp-validation-for="BireyselKurumsalID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label for="KurumsalSirketAdi" class="form-label">Kurumsal Şirket Adı</label>
-                <input asp-for="KurumsalSirketAdi" class="form-control" />
-                <span asp-validation-for="KurumsalSirketAdi" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label for="IhaleStatuID" class="form-label">İhale Statüsü</label>
-                <input asp-for="IhaleStatuID" class="form-control" />
-                <span asp-validation-for="IhaleStatuID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label for="IhaleBaslangicTarihi" class="form-label">İhale Başlangıç Tarihi</label>
-                <input asp-for="IhaleBaslangicTarihi" class="form-control" />
-                <span asp-validation-for="IhaleBaslangicTarihi" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label for="IhaleBaslangicSaati" class="form-label">İhale Başlangıç Saati</label>
-                <input asp-for="IhaleBaslangicSaati" class="form-control" />
-                <span asp-validation-for="IhaleBaslangicSaati" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label for="IhaleBitisTarihi" class="form-label">İhale Bitiş Tarihi</label>
-                <input asp-for="IhaleBitisTarihi" class="form-control" />
-                <span asp-validation-for="IhaleBitisTarihi" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label for="IhaleBitisSaati" class="form-label">İhale Bitiş Saati</label>
-                <input asp-for="IhaleBitisSaati" class="form-control" />
-                <span asp-validation-for="IhaleBitisSaati" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label for="AracID" class="form-label">Araç Modeli</label>
-                <input asp-for="AracID" class="form-control" />
-                <span asp-validation-for="AracID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label for="AracOzellikID" class="form-label">Araç Özelliği</label>
-                <input asp-for="AracOzellikID" class="form-control" />
-                <span asp-validation-for="AracOzellikID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label for="IhaleBaslangicFiyati" class="form-label">İhale Başlangıç Fiyatı</label>
-                <input asp-for="IhaleBaslangicFiyati" class="form-control" />
-                <span asp-validation-for="IhaleBaslangicFiyati" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label for="MinimumAlimFiyati" class="form-label">Minimum Alım Fiyatı</label>
-                <input asp-for="MinimumAlimFiyati" class="form-control" />
-                <span asp-validation-for="MinimumAlimFiyati" class="text-danger"></span>
-            </div>
-            <br />
-            <div class="form-group">
-                <a asp-action="AracListeleme">Listeye Geri Dön</a>
-                <input type="submit" value="Kaydet" class="btn btn-success" />
-            </div>
-        </form>
-    </div>
+	<h1 style="color:dimgrey;">İhale Düzenleme</h1>
+	<div class="col-md-4">
+		<form asp-action="Edit">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<div class="form-group">
+				<input asp-for="IhaleID" class="form-control" type="hidden" />
+				<span asp-validation-for="IhaleID" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label for="IhaleAdi" class="form-label">İhale Adı</label>
+				<input asp-for="IhaleAdi" class="form-control" />
+				<span asp-validation-for="IhaleAdi" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<input asp-for="BireyselKurumsalID" class="form-control" type="hidden" />
+				<span asp-validation-for="BireyselKurumsalID" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<input asp-for="KurumsalSirketAdi" class="form-control" type="hidden" />
+				<span asp-validation-for="KurumsalSirketAdi" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<input asp-for="IhaleStatuID" class="form-control" type="hidden" />
+				<span asp-validation-for="IhaleStatuID" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label for="IhaleBaslangicTarihi" class="form-label">İhale Başlangıç Tarihi</label>
+				<input asp-for="IhaleBaslangicTarihi" class="form-control" />
+				<span asp-validation-for="IhaleBaslangicTarihi" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label for="IhaleBaslangicSaati" class="form-label">İhale Başlangıç Saati</label>
+				<input asp-for="IhaleBaslangicSaati" class="form-control" />
+				<span asp-validation-for="IhaleBaslangicSaati" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label for="IhaleBitisTarihi" class="form-label">İhale Bitiş Tarihi</label>
+				<input asp-for="IhaleBitisTarihi" class="form-control" />
+				<span asp-validation-for="IhaleBitisTarihi" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label for="IhaleBitisSaati" class="form-label">İhale Bitiş Saati</label>
+				<input asp-for="IhaleBitisSaati" class="form-control" />
+				<span asp-validation-for="IhaleBitisSaati" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<input asp-for="AracID" class="form-control" type="hidden" />
+				<span asp-validation-for="AracID" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<input asp-for="AracOzellikID" class="form-control" type="hidden" />
+				<span asp-validation-for="AracOzellikID" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label for="IhaleBaslangicFiyati" class="form-label">İhale Başlangıç Fiyatı</label>
+				<input asp-for="IhaleBaslangicFiyati" class="form-control" />
+				<span asp-validation-for="IhaleBaslangicFiyati" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label for="MinimumAlimFiyati" class="form-label">Minimum Alım Fiyatı</label>
+				<input asp-for="MinimumAlimFiyati" class="form-control" />
+				<span asp-validation-for="MinimumAlimFiyati" class="text-danger"></span>
+			</div>
+			<br />
+			<div class="form-group">
+				<input type="submit" value="Kaydet" class="btn btn-success" />
+				<a asp-action="AracListeleme">Listeye Geri Dön</a>
+			</div>
+		</form>
+	</div>
 </div>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
 }
