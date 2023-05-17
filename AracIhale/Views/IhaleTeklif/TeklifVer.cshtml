@@ -1,19 +1,18 @@
 ﻿@model AracIhale.UI.Models.VM.BireyselAracTeklif
-<h1>Teklif Ver</h1>
 
 
-<hr />
-<div class="row">
+
+<div class="bg-white rounded p-3">
+	<h1 style="color:dimgrey;">İhaleye Teklif Verme</h1>
 	<div class="col-md-4">
 		<form asp-action="TeklifVer">
 			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 			<div class="form-group">
-				<label asp-for="IhaleID" class="control-label"></label>
-				<input asp-for="IhaleID" class="form-control" />
+				<input asp-for="IhaleID" class="form-control" type="hidden" />
 				<span asp-validation-for="IhaleID" class="text-danger"></span>
 			</div>
 			<div class="form-group">
-				<label asp-for="KullaniciID" class="control-label"></label>
+				<label for="KullaniciID" class="form-label">Teklif Veren Kullanıcının Adı</label>
 				<input asp-for="KullaniciID" class="form-control" />
 				<span asp-validation-for="KullaniciID" class="text-danger"></span>
 			</div>
@@ -22,31 +21,21 @@
 				<input asp-for="TeklifFiyati" class="form-control" />
 				<span asp-validation-for="TeklifFiyati" class="text-danger"></span>
 			</div>
-			@*<div class="form-group">
-				<label asp-for="TeklifTarihi" class="control-label"></label>
-				<input asp-for="TeklifTarihi" class="form-control" />
-				<span asp-validation-for="TeklifTarihi" class="text-danger"></span>
-			</div>*@
-
+			<br />
 			<div class="form-group">
-				<input type="submit" value="Teklif Ver" class="btn btn-primary" onclick="return confirmTeklif()" />
+				<a href="/Ihale/AracListeleme" class="btn btn-primary">İptal</a>
+				<input type="submit" value="Teklif Ver" class="btn btn-success" onclick="return confirmTeklif()" />
 			</div>
 
-			
+
 		</form>
 	</div>
 </div>
-
-<div>
-	<a asp-action="AracListeleme">İhale Listesine Dön</a>
-</div>
-
 @section Scripts {
 	@{
 		await Html.RenderPartialAsync("_ValidationScriptsPartial");
 	}
 }
-
 <script>
 	function confirmTeklif() {
 		return confirm('Teklifiniz başarıyla gerçekleştirildi.');

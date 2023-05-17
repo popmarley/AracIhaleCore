@@ -31,7 +31,7 @@ namespace AracIhale.UI.Controllers
             if (ModelState.IsValid)
             {
                 await _apiGateway.CreateIhaleTeklif(ihaleTeklif);
-                return RedirectToAction("Teklifler");
+                return RedirectToAction("AracListeleme","Ihale");
             }
             return View(ihaleTeklif);
         }
