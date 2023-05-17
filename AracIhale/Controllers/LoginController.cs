@@ -50,8 +50,9 @@ namespace AracIhale.UI.Controllers
 					options.Expires = DateTime.Now.AddDays(30); // Çerezin 30 gün boyunca geçerli olmasını sağlıyoruz
 					Response.Cookies.Append("username", model.KullaniciAdi, options);
 				}
-				
+				HttpContext.Session.MySessionSet("KullaniciAdi", user.Ad); // Kullanıcı gerçek adını bir Session'a kaydediyoruz
 				HttpContext.Session.MySessionSet("Ad", model.KullaniciAdi);// Kullanıcı adını bir Session'a kaydediyoruz
+				HttpContext.Session.MySessionSet("KullaniciID", user.KullaniciID);// Kullanıcı IDsini bir Session'a kaydediyoruz
 
 				// Giriş başarılı oldu, kullanıcıyı Ihale/AracListeleme sayfasına yönlendir
 				return RedirectToAction("AracListeleme", "Ihale");

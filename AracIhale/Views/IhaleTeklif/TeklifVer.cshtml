@@ -1,9 +1,16 @@
 ﻿@model AracIhale.UI.Models.VM.BireyselAracTeklif
+@using System.Runtime.Serialization
+@using AracIhale.UI.Models.Extension;
+@using Microsoft.AspNetCore.Http
+@using AracIhale.UI.Models.Enums
 
-
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+	var kullaniciID = HttpContextAccessor.HttpContext?.Session.MySessionGet<int>("KullaniciID");
+}
 
 <div class="bg-white rounded p-3">
-	<h1 style="color:dimgrey;">İhaleye Teklif Verme</h1>
+	<h4 style="color:dimgrey;">İhaleye Teklif Verme</h4>
 	<div class="col-md-4">
 		<form asp-action="TeklifVer">
 			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -12,8 +19,7 @@
 				<span asp-validation-for="IhaleID" class="text-danger"></span>
 			</div>
 			<div class="form-group">
-				<label for="KullaniciID" class="form-label">Teklif Veren Kullanıcının Adı</label>
-				<input asp-for="KullaniciID" class="form-control" />
+				<input asp-for="KullaniciID" class="form-control" value="@kullaniciID" readonly type="hidden" />
 				<span asp-validation-for="KullaniciID" class="text-danger"></span>
 			</div>
 			<div class="form-group">
