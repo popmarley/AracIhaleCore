@@ -99,8 +99,31 @@ namespace AracIhale.UI.Controllers
             return View(ihaleler);
         }
 
+		[HttpPost]
+		public async Task<IActionResult> Listele(IhaleListesi ihale, string ihaleAdi, int aracTuru, int aracDurumu)
+		{
+			List<IhaleListesi> ihaleler = await _apiGateway.ListIhale();
+
+			if (!string.IsNullOrEmpty(ihaleAdi))
+			{
+				ihaleler = ihaleler.Where(i => i.IhaleAdi == ihaleAdi).ToList();
+			}
+
+			if (aracTuru != 0)
+			{
+				ihaleler = ihaleler.Where(i => i.BireyselKurumsalID == aracTuru).ToList();
+			}
+
+			if (aracDurumu != 0)
+			{
+				ihaleler = ihaleler.Where(i => i.IhaleStatuID == aracDurumu).ToList();
+			}
+
+			return View("AracListeleme", ihaleler);
+        }
+
         [HttpPost]
-        public async Task<IActionResult> Listele(IhaleListesi ihale, string ihaleAdi, int aracTuru, int aracDurumu)
+        public async Task<IActionResult> IhaleListeFiltrele(IhaleListesi ihale, string ihaleAdi, int aracTuru, int aracDurumu)
         {
             List<IhaleListesi> ihaleler = await _apiGateway.ListIhale();
 
@@ -119,7 +142,7 @@ namespace AracIhale.UI.Controllers
                 ihaleler = ihaleler.Where(i => i.IhaleStatuID == aracDurumu).ToList();
             }
 
-            return View("AracListeleme", ihaleler);
+            return View("IhaleListeleme", ihaleler);
         }
 
     }
