@@ -1,4 +1,4 @@
-﻿@model IEnumerable<AracIhale.UI.Models.VM.IhaleListesi>
+﻿@model IEnumerable<AracIhale.UI.Models.VM.BireyselAracTeklif>
 
 @{
 	int sayac = 1;
@@ -9,65 +9,38 @@
 	<thead>
 		<tr>
 			<th>İhale Numarası</th>
-			<th>Araç Markası</th>
-			<th>Modeli</th>
-			<th>Bireysel/Kurumsal</th>
-			<th>Statüsü</th>
+			<th>İhale Adı</th>
 			<th>Teklif Veren Kullanıcı</th>
-			<th>Kaydetme Zamanı</th>
 			<th>İhale Başlangıç Fiyatı</th>
 			<th>Mininum Alım Fiyatı</th>
 			<th>Teklif Fiyatı</th>
+			<th>Teklif Tarihi</th>
 			<th>Aksiyon</th>
 			<th></th>
 		</tr>
 	</thead>
 	<tbody>
-     @*   @foreach (var item in Model)*@
-        {
-            <tr>
-                <td>@sayac</td>
-                @*<td>@item.AracOzellik.AracMarka.MarkaAdi</td>
-            <td>@item.AracOzellik.AracModel.ModelAdi</td>*@
-                <td>
-                   @* @if (item.BireyselKurumsalID == 1)
-                    {
-                        @:Bireysel
-                    }
-                    else if (item.BireyselKurumsalID == 2)
-                    {
-                        @:Kurumsal
-                    }*@
-                </td>
-                <td>
-                   @* @switch (item.IhaleStatuID)
-                    {
-                        case 1:
-                            @:Başlamadı
-                            break;
-                        case 2:
-                            @:Başladı
-                            break;
-                        case 3:
-                            @:Bitti
-                            break;
-                        case 4:
-                            @:İptal
-                            break;*@
-                    }
-                </td>
-               @* <td>@item.KullaniciAdi</td>
-                <td>@item.TeklifTarihi</td>*@
-               @* <td>@item.IhaleBaslangicFiyati ₺</td>
-                <td>@item.MinimumAlimFiyati ₺</td>*@
-                @*<td>@item.TeklifFiyati ₺</td>*@
-               @* <td>*@
-                   @* <a asp-action="AracIhaleOlusturma" asp-controller="Ihale" class="btn btn-success me-2">Onayla</a>
-                    <a asp-action="AracIhaleOlusturma" asp-controller="Ihale" class="btn btn-danger me-2">Reddet</a>*@
-                @*</td>
-                <td></td>*@
-            </tr>
-            sayac++;
-        }
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>@sayac</td>
+				<td>@Html.DisplayFor(modelItem => item.IhaleListesi.IhaleAdi)</td>
+				<td>@Html.DisplayFor(modelItem => item.Kullanici.KullaniciAdi)</td>
+				<td>@Html.DisplayFor(modelItem => item.IhaleListesi.IhaleBaslangicFiyati) ₺</td>
+				<td>@Html.DisplayFor(modelItem => item.IhaleListesi.MinimumAlimFiyati) ₺</td>
+				<td>@Html.DisplayFor(modelItem => item.TeklifFiyati)</td>
+				<td>@Html.DisplayFor(modelItem => item.TeklifTarihi)</td>
+				<td>
+					<a href="@Url.Action("DeleteTeklif", "IhaleTeklif", new { id = item.TeklifID })" class="btn btn-success me-2" onclick="return confirm('Reddetmek istediğinize emin misiniz?')">Reddet</a>
+				</td>
+				<td>
+					<a href="@Url.Action("EditTeklif", "IhaleTeklif", new { id = item.TeklifID })" class="btn btn-danger me-2">Onayla</a>
+				</td>
+				<td></td>
+			</tr>
+			sayac++;
+		}
 	</tbody>
 </table>
+<br />
+<a href="@Url.Action("AracListeleme", "Ihale")" class="btn btn-success me-2">İhale Listesine Dön</a>

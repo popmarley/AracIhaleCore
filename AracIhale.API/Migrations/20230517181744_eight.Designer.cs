@@ -4,14 +4,16 @@ using AracIhale.API.MyContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AracIhale.API.Migrations
 {
     [DbContext(typeof(MyDBContext))]
-    partial class MyDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230517181744_eight")]
+    partial class eight
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -445,8 +447,7 @@ namespace AracIhale.API.Migrations
                 {
                     b.HasOne("AracIhale.API.DTO.IhaleListesi", "IhaleListesi")
                         .WithMany()
-                        .HasForeignKey("IhaleID")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("IhaleID");
 
                     b.HasOne("AracIhale.API.DTO.IhaleListesi", null)
                         .WithMany("BireyselAracTeklifs")
@@ -454,8 +455,7 @@ namespace AracIhale.API.Migrations
 
                     b.HasOne("AracIhale.API.DTO.Kullanici", "Kullanici")
                         .WithMany()
-                        .HasForeignKey("KullaniciID")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("KullaniciID");
 
                     b.HasOne("AracIhale.API.DTO.Kullanici", null)
                         .WithMany("BireyselAracTeklifs")

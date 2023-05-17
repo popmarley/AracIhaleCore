@@ -8,7 +8,7 @@ namespace AracIhale.API.DTO
 		public AracOzellik()
 		{
 			Araclars = new HashSet<Araclar>();
-			IhaleListesis = new HashSet<IhaleListesi>();
+			//IhaleListesis = new HashSet<IhaleListesi>();
 		}
 
 		public int AracOzellikID { get; set; }
@@ -50,6 +50,6 @@ namespace AracIhale.API.DTO
 		//public virtual Yil Yil { get; set; }
 
 
-		public virtual ICollection<IhaleListesi> IhaleListesis { get; set; }
+		//public virtual ICollection<IhaleListesi> IhaleListesis { get; set; }
 	}
 }

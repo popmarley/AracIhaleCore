@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AracIhale.API.DTO
 {
@@ -39,10 +40,12 @@ namespace AracIhale.API.DTO
         public string MinimumAlimFiyati { get; set; }
 
         public int? AracOzellikID { get; set; }
+		
+        [ForeignKey("AracID")]
+		public virtual Araclar Araclar { get; set; }
 
-        public virtual Araclar Araclar { get; set; }
-
-        public virtual AracOzellik AracOzellik { get; set; }
+		[ForeignKey("AracOzellikID")]
+		public virtual AracOzellik AracOzellik { get; set; }
 
         public virtual BireyselKurumsal BireyselKurumsal { get; set; }
 

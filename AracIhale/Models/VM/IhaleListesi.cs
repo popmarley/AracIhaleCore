@@ -21,13 +21,13 @@ namespace AracIhale.UI.Models.VM
 
 		public int IhaleStatuID { get; set; }
 		[StringLength(75)]
-		public DateTime IhaleBaslangicTarihi { get; set; }
+		public string IhaleBaslangicTarihi { get; set; }
 		[StringLength(75)]
-		public DateTime IhaleBaslangicSaati { get; set; }
+		public string IhaleBaslangicSaati { get; set; }
 		[StringLength(75)]
-		public DateTime IhaleBitisTarihi { get; set; }
+		public string IhaleBitisTarihi { get; set; }
 		[StringLength(75)]
-		public DateTime IhaleBitisSaati { get; set; }
+		public string IhaleBitisSaati { get; set; }
 
 		public int AracID { get; set; }
 		[StringLength(75)]

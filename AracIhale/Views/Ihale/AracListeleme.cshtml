@@ -4,7 +4,7 @@
     int sayac = 1;
 }
 
-<form class="bg-white rounded p-3">
+<form class="bg-white rounded p-3" action="@Url.Action("Listele", "Ihale")" method="post">
     <h4 style="color:dimgrey;">Kriterler</h4>
     <div class="row">
         <div class="col-md-6 mb-6">
@@ -15,15 +15,18 @@
         <div class="col-md-3 mb-3">
             <label for="aracTuru" class="form-label">Bireysel/Kurumsal</label>
             <select class="form-control" id="aracTuru">
-                <option>Bireysel</option>
-                <option>Kurumsal</option>
+                <option value="1">Bireysel</option>
+                <option value="2">Kurumsal</option>
             </select>
         </div>
         <div class="col-md-3 mb-3">
             <label for="aracDurumu" class="form-label">Statüsü</label>
             <select class="form-control" id="aracDurumu">
-                <option>Yeni</option>
-                <option>Kullanılmış</option>
+                <option value="">Seçiniz...</option>
+                <option value="1">Başlamadı</option>
+                <option value="2">Başladı</option>
+                <option value="3">Bitti</option>
+                <option value="4">İptal</option>
             </select>
         </div>
     </div>
@@ -67,10 +70,10 @@
                     }
                 </td>
                 <td>
-                    @item.IhaleBaslangicTarihi.ToString("dd/MM/yyyy")
+                    @item.IhaleBaslangicTarihi
                 </td>
                 <td>
-                    @item.IhaleBitisTarihi.ToString("dd/MM/yyyy")
+                    @item.IhaleBitisTarihi
                 </td>
                 <td>
                     @switch (item.IhaleStatuID)
@@ -90,9 +93,8 @@
                     }
                 </td>
                 <td>
-                    <a href="#" class="btn btn-success me-2">Düzenle</a>
-                    <a href="@Url.Action("Delete", "Ihale", new { id = item.IhaleID })" class="btn btn-danger me-2" onclick="return confirm('Silmek istediğinize emin misiniz?')">Sil</a>
-                    @*<a href="#" class="btn btn-danger me-2">Sil</a>*@
+                    <a href="@Url.Action("Edit", "Ihale", new { id = item.IhaleID })" class="btn btn-success me-2">Düzenle</a>
+                    <a href="#" class="btn btn-danger me-2" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="@item.IhaleID">Sil</a>
                 </td>
             </tr>
             index++;
@@ -151,7 +153,9 @@
                 </td>
                 <td>@item.IhaleBaslangicFiyati ₺</td>
                 <td>@item.MinimumAlimFiyati ₺</td>
-                <td><a asp-action="AracIhaleTeklifVerme" asp-controller="Ihale" class="btn btn-success me-2">Teklif Ver</a></td>
+                <td>
+                    <a href="@Url.Action("TeklifVer", "IhaleTeklif", new { id = item.IhaleID })" class="btn btn-success me-2">Teklif Ver</a>
+                    </td>
                 <td></td>
             </tr>
             sayac++;
@@ -159,3 +163,43 @@
     </tbody>
 </table>
 
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">İhale Silme Onayı</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Silmek istediğinizden emin misiniz?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hayır</button>
+                <button type="button" class="btn btn-danger" id="confirmDelete">Evet</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        var deleteId;
+
+        // Store the id of the item to delete
+        $('#deleteModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            deleteId = button.data('id');
+        });
+
+        // Handle click on "Evet" button
+        $('#confirmDelete').click(function () {
+            $.post('@Url.Action("Delete", "Ihale")', { id: deleteId })
+                .done(function () {
+                    window.location.reload();
+                })
+                .fail(function () {
+                    alert('Silme işlemi başarısız oldu.');
+                });
+        });
+    });
+</script>

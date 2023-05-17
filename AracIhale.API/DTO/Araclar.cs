@@ -11,7 +11,7 @@ namespace AracIhale.API.DTO
 			//AracAliciBilgis = new HashSet<AracAliciBilgi>();
 			//AracParcaBilgis = new HashSet<AracParcaBilgi>();
 			//AracTarihces = new HashSet<AracTarihce>();
-			IhaleListesis = new HashSet<IhaleListesi>();
+			//IhaleListesis = new HashSet<IhaleListesi>();
 			//IlanBilgis = new HashSet<IlanBilgi>();
 			//TramerTutaris = new HashSet<TramerTutari>();
 		}
@@ -79,7 +79,7 @@ namespace AracIhale.API.DTO
 		//public virtual ICollection<AracTarihce> AracTarihces { get; set; }
 
 
-		public virtual ICollection<IhaleListesi> IhaleListesis { get; set; }
+		//public virtual ICollection<IhaleListesi> IhaleListesis { get; set; }
 
 
 		//public virtual ICollection<IlanBilgi> IlanBilgis { get; set; }

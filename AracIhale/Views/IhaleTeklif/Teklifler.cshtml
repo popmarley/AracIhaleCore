@@ -1,0 +1,48 @@
+﻿@model IEnumerable<AracIhale.UI.Models.VM.BireyselAracTeklif>
+
+@{
+	int sayac = 1;
+
+}
+
+<div class="bg-white rounded p-3">
+	<table class="table bg-white rounded p-3">
+		<h4 style="color:dimgrey;">İhale Teklif Listesi</h4>
+		<thead>
+			<tr>
+				<th>İhale Numarası</th>
+				<th>İhale Adı</th>
+				<th>Teklif Veren Kullanıcı</th>
+				<th>İhale Başlangıç Fiyatı</th>
+				<th>Mininum Alım Fiyatı</th>
+				<th>Teklif Fiyatı</th>
+				<th>Teklif Tarihi</th>
+				<th>Aksiyon</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>@sayac</td>
+					<td>@item.IhaleListesi.IhaleAdi</td>
+					<td>@item.Kullanici.KullaniciAdi</td>
+					<td>@item.IhaleListesi.IhaleBaslangicFiyati ₺</td>
+					<td>@item.IhaleListesi.MinimumAlimFiyati ₺</td>
+					<td>@item.TeklifFiyati ₺</td>
+					<td>@(item.TeklifTarihi?.ToString("dd/MM/yyyy"))</td>
+					<td>
+						<a href="@Url.Action("EditTeklif", "IhaleTeklif", new { id = item.TeklifID })" class="btn btn-success me-2">Onayla</a>
+						<a href="@Url.Action("DeleteTeklif", "IhaleTeklif", new { id = item.TeklifID })" class="btn btn-danger me-2" onclick="return confirm('Reddetmek istediğinize emin misiniz?')">Reddet</a>
+
+					</td>
+					<td></td>
+				</tr>
+				sayac++;
+			}
+		</tbody>
+	</table>
+</div>
+<br />
+<a href="@Url.Action("AracListeleme", "Ihale")" class="btn btn-success me-2">İhale Listesine Dön</a>

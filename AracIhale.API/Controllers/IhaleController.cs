@@ -43,6 +43,10 @@ namespace AracIhale.API.Controllers
                 IhaleBaslangicFiyati = c.IhaleBaslangicFiyati,
                 MinimumAlimFiyati = c.MinimumAlimFiyati,
 
+                AracOzellikID=c.AracOzellikID,
+                Araclar=c.Araclar,
+         
+               
 
             }).ToListAsync();
         }
@@ -60,31 +64,38 @@ namespace AracIhale.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<IhaleListesi>> CreateIhale(IhaleListesi ihale)
+        public async Task<ActionResult<List<IhaleListesi>>> CreateIhale(List<IhaleListesi> ihaleler)
         {
-            _context.Add(ihale);
+            foreach (var ihale in ihaleler)
+            {
+                // Her ihale için hata kontrolü yapabilirsiniz
+
+                _context.Add(ihale);
+            }
 
             await _context.SaveChangesAsync();
 
-            return Ok(ihale);
+            return Ok(ihaleler);
         }
 
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateIhale(int id, IhaleListesi ihale)
-        {
-            if (id != ihale.IhaleID)
-            {
-                return BadRequest("Invalid Ihale ID");
-            }
+		public async Task<IActionResult> UpdateIhale(int id, IhaleListesi ihale)
+		{
+			if (id != ihale.IhaleID)
+			{
+				return BadRequest("Invalid Ihale ID");
+			}
 
-            _context.Entry(ihale).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+			// AracID sütunu burada güncellenmeli veya kontrol edilmeli (eğer kullanılmıyorsa).
 
-            return Ok();
-        }
+			_context.Entry(ihale).State = EntityState.Modified;
+			await _context.SaveChangesAsync();
 
-        [HttpDelete("{id}")]
+			return Ok();
+		}
+
+		[HttpDelete("{id}")]
         public async Task<IActionResult> DeleteIhale(int id)
         {
             var ihale = await _context.IhaleListesi.FindAsync(id);

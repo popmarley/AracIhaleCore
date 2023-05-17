@@ -4,14 +4,16 @@ using AracIhale.API.MyContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AracIhale.API.Migrations
 {
     [DbContext(typeof(MyDBContext))]
-    partial class MyDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230517004704_seven")]
+    partial class seven
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -194,9 +196,6 @@ namespace AracIhale.API.Migrations
                     b.Property<int?>("KullaniciID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("KullaniciID1")
-                        .HasColumnType("int");
-
                     b.Property<string>("TeklifFiyati")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -206,13 +205,9 @@ namespace AracIhale.API.Migrations
 
                     b.HasKey("TeklifID");
 
-                    b.HasIndex("IhaleID");
-
                     b.HasIndex("IhaleListesiIhaleID");
 
                     b.HasIndex("KullaniciID");
-
-                    b.HasIndex("KullaniciID1");
 
                     b.ToTable("BireyselAracTeklif");
                 });
@@ -244,6 +239,9 @@ namespace AracIhale.API.Migrations
                         .HasColumnType("int");
 
                     b.Property<int?>("AracOzellikID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("AraclarAracID")
                         .HasColumnType("int");
 
                     b.Property<int?>("BireyselKurumsalID")
@@ -289,6 +287,8 @@ namespace AracIhale.API.Migrations
                     b.HasIndex("AracID");
 
                     b.HasIndex("AracOzellikID");
+
+                    b.HasIndex("AraclarAracID");
 
                     b.HasIndex("BireyselKurumsalID");
 
@@ -444,22 +444,12 @@ namespace AracIhale.API.Migrations
             modelBuilder.Entity("AracIhale.API.DTO.BireyselAracTeklif", b =>
                 {
                     b.HasOne("AracIhale.API.DTO.IhaleListesi", "IhaleListesi")
-                        .WithMany()
-                        .HasForeignKey("IhaleID")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("AracIhale.API.DTO.IhaleListesi", null)
                         .WithMany("BireyselAracTeklifs")
                         .HasForeignKey("IhaleListesiIhaleID");
 
                     b.HasOne("AracIhale.API.DTO.Kullanici", "Kullanici")
-                        .WithMany()
-                        .HasForeignKey("KullaniciID")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("AracIhale.API.DTO.Kullanici", null)
                         .WithMany("BireyselAracTeklifs")
-                        .HasForeignKey("KullaniciID1");
+                        .HasForeignKey("KullaniciID");
 
                     b.Navigation("IhaleListesi");
 
@@ -473,8 +463,12 @@ namespace AracIhale.API.Migrations
                         .HasForeignKey("AracID");
 
                     b.HasOne("AracIhale.API.DTO.AracOzellik", "AracOzellik")
-                        .WithMany()
+                        .WithMany("IhaleListesis")
                         .HasForeignKey("AracOzellikID");
+
+                    b.HasOne("AracIhale.API.DTO.Araclar", null)
+                        .WithMany("IhaleListesis")
+                        .HasForeignKey("AraclarAracID");
 
                     b.HasOne("AracIhale.API.DTO.BireyselKurumsal", "BireyselKurumsal")
                         .WithMany("IhaleListesis")
@@ -523,6 +517,13 @@ namespace AracIhale.API.Migrations
             modelBuilder.Entity("AracIhale.API.DTO.AracOzellik", b =>
                 {
                     b.Navigation("Araclars");
+
+                    b.Navigation("IhaleListesis");
+                });
+
+            modelBuilder.Entity("AracIhale.API.DTO.Araclar", b =>
+                {
+                    b.Navigation("IhaleListesis");
                 });
 
             modelBuilder.Entity("AracIhale.API.DTO.BireyselKurumsal", b =>

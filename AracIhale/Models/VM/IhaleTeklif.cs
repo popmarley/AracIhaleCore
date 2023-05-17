@@ -1,10 +1,9 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System;
 
-namespace AracIhale.API.DTO
+namespace AracIhale.UI.Models.VM
 {
-    public class BireyselAracTeklif
+    public class IhaleTeklif
     {
         [Key]
         public int TeklifID { get; set; }
@@ -17,11 +16,9 @@ namespace AracIhale.API.DTO
         public DateTime? TeklifTarihi { get; set; }
 
         public int? IhaleID { get; set; }
-        
-        [ForeignKey("IhaleID")]
+
         public virtual IhaleListesi IhaleListesi { get; set; }
 
-		[ForeignKey("KullaniciID")]
-		public virtual Kullanici Kullanici { get; set; }
+        public virtual Kullanici Kullanici { get; set; }
     }
 }

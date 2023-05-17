@@ -18,9 +18,15 @@ namespace AracIhale.API.MyContext
         public DbSet<Rol> Rol { get; set;}
         public DbSet<BireyselAracTeklif> BireyselAracTeklif { get; set;}
         public DbSet<AracModel> AracModels { get; set;}
-        public DbSet<AracMarka> AracMarkas { get; set;}  
-       
+        public DbSet<AracMarka> AracMarkas { get; set;}
 
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
+		{
+			modelBuilder.Entity<IhaleListesi>()
+				.HasOne(i => i.Araclar)
+				.WithMany()
+				.HasForeignKey(i => i.AracID);
+		}
 
-    }
+	}
 }
