@@ -52,5 +52,7 @@ namespace AracIhale.API.DTO
         public virtual IhaleStatu IhaleStatu { get; set; }
         public virtual ICollection<BireyselAracTeklif> BireyselAracTeklifs { get; set; }
 
-    }
+		public virtual ICollection<OnaylananTeklif> OnaylananTeklifs { get; set; }
+
+	}
 }

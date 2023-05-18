@@ -4,14 +4,16 @@ using AracIhale.API.MyContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AracIhale.API.Migrations
 {
     [DbContext(typeof(MyDBContext))]
-    partial class MyDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230518102634_ten")]
+    partial class ten
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -377,7 +379,13 @@ namespace AracIhale.API.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<int?>("BireyselAracTeklifTeklifID")
+                        .HasColumnType("int");
+
                     b.Property<int?>("IhaleID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("IhaleListesiIhaleID")
                         .HasColumnType("int");
 
                     b.Property<int?>("KullaniciID")
@@ -386,22 +394,18 @@ namespace AracIhale.API.Migrations
                     b.Property<DateTime?>("OnaylanmaTarihi")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("TeklifFiyati")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
                     b.Property<int?>("TeklifID")
                         .HasColumnType("int");
 
                     b.HasKey("OnaylananTeklifID");
 
-                    b.HasIndex("IhaleID");
+                    b.HasIndex("BireyselAracTeklifTeklifID");
+
+                    b.HasIndex("IhaleListesiIhaleID");
 
                     b.HasIndex("KullaniciID");
 
-                    b.HasIndex("TeklifID");
-
-                    b.ToTable("OnaylananTeklif");
+                    b.ToTable("OnaylananTeklifs");
                 });
 
             modelBuilder.Entity("AracIhale.API.DTO.Rol", b =>
@@ -524,17 +528,17 @@ namespace AracIhale.API.Migrations
 
             modelBuilder.Entity("AracIhale.API.DTO.OnaylananTeklif", b =>
                 {
+                    b.HasOne("AracIhale.API.DTO.BireyselAracTeklif", "BireyselAracTeklif")
+                        .WithMany("OnaylananTeklifs")
+                        .HasForeignKey("BireyselAracTeklifTeklifID");
+
                     b.HasOne("AracIhale.API.DTO.IhaleListesi", "IhaleListesi")
                         .WithMany("OnaylananTeklifs")
-                        .HasForeignKey("IhaleID");
+                        .HasForeignKey("IhaleListesiIhaleID");
 
                     b.HasOne("AracIhale.API.DTO.Kullanici", "Kullanici")
                         .WithMany("OnaylananTeklifs")
                         .HasForeignKey("KullaniciID");
-
-                    b.HasOne("AracIhale.API.DTO.BireyselAracTeklif", "BireyselAracTeklif")
-                        .WithMany("OnaylananTeklifs")
-                        .HasForeignKey("TeklifID");
 
                     b.Navigation("BireyselAracTeklif");
 

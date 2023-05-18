@@ -98,7 +98,10 @@ namespace AracIhale.API.Controllers
 		[HttpGet("{id}/onayla")]
 		public async Task<IActionResult> Onayla(int id)
 		{
-			var teklif = await _context.BireyselAracTeklif.FindAsync(id);
+			var teklif = await _context.BireyselAracTeklif
+		.Include(t => t.IhaleListesi)
+		.Include(t => t.Kullanici)
+		.FirstOrDefaultAsync(t => t.TeklifID == id);
 			if (teklif == null)
 			{
 				return NotFound("Geçersiz Teklif ID");
@@ -112,6 +115,19 @@ namespace AracIhale.API.Controllers
 				.ToListAsync();
 
 			_context.BireyselAracTeklif.RemoveRange(digerTeklifler);
+
+			var onaylananTeklif = new OnaylananTeklif
+			{
+				
+				TeklifID = teklif.TeklifID,
+				KullaniciID = teklif.KullaniciID,
+				IhaleID = teklif.IhaleID,
+				OnaylanmaTarihi = DateTime.UtcNow,
+				TeklifFiyati=teklif.TeklifFiyati,
+
+			};
+
+			_context.OnaylananTeklif.Add(onaylananTeklif);
 			await _context.SaveChangesAsync();
 
 			return Ok();

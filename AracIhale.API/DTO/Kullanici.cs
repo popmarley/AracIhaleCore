@@ -9,6 +9,7 @@ namespace AracIhale.API.DTO
 		{
 			//AracAliciBilgis = new HashSet<AracAliciBilgi>();
 			Araclars = new HashSet<Araclar>();
+			OnaylananTeklifs = new HashSet<OnaylananTeklif>();
 			//BireyselAracTeklifs = new HashSet<BireyselAracTeklif>();
 			//KurumsalUyeOnays = new HashSet<KurumsalUyeOnay>();
 			//OdemeBilgisis = new HashSet<OdemeBilgisi>();
@@ -70,6 +71,7 @@ namespace AracIhale.API.DTO
 
 		public virtual Rol Rol { get; set; }
 
+		public virtual ICollection<OnaylananTeklif> OnaylananTeklifs { get; set; }
 
 		//public virtual ICollection<KurumsalUyeOnay> KurumsalUyeOnays { get; set; }
 

@@ -19,6 +19,7 @@ namespace AracIhale.API.MyContext
         public DbSet<BireyselAracTeklif> BireyselAracTeklif { get; set;}
         public DbSet<AracModel> AracModels { get; set;}
         public DbSet<AracMarka> AracMarkas { get; set;}
+        public DbSet<OnaylananTeklif> OnaylananTeklif { get; set;}
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
@@ -26,6 +27,27 @@ namespace AracIhale.API.MyContext
 				.HasOne(i => i.Araclar)
 				.WithMany()
 				.HasForeignKey(i => i.AracID);
+
+			modelBuilder.Entity<BireyselAracTeklif>()
+			   .HasOne(t => t.IhaleListesi)
+			   .WithMany(i => i.BireyselAracTeklifs)
+			   .HasForeignKey(t => t.IhaleID);
+
+			modelBuilder.Entity<OnaylananTeklif>()
+				.HasOne(t => t.BireyselAracTeklif)
+				.WithMany(o => o.OnaylananTeklifs)
+				.HasForeignKey(t => t.TeklifID);
+
+			modelBuilder.Entity<OnaylananTeklif>()
+				.HasOne(t => t.IhaleListesi)
+				.WithMany(o => o.OnaylananTeklifs)
+				.HasForeignKey(t => t.IhaleID);
+
+			modelBuilder.Entity<OnaylananTeklif>()
+				.HasOne(t => t.Kullanici)
+				.WithMany(o => o.OnaylananTeklifs)
+				.HasForeignKey(t => t.KullaniciID);
+
 		}
 
 	}
