@@ -71,6 +71,20 @@ namespace AracIhale.UI.Controllers
                 return View("Error");
             }
         }
-    }
+
+		public async Task<IActionResult> OnaylaTeklif(int id)
+		{
+			var result = await _apiGateway.OnaylaIhaleTeklif(id);
+			if (result)
+			{
+				return RedirectToAction("Teklifler");
+			}
+			else
+			{
+				return View("Error");
+			}
+		}
+
+	}
 }
 

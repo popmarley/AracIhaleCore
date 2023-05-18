@@ -94,5 +94,27 @@ namespace AracIhale.API.Controllers
 
 			return Ok();
 		}
+
+		[HttpGet("{id}/onayla")]
+		public async Task<IActionResult> Onayla(int id)
+		{
+			var teklif = await _context.BireyselAracTeklif.FindAsync(id);
+			if (teklif == null)
+			{
+				return NotFound("Geçersiz Teklif ID");
+			}
+
+			var ihaleID = teklif.IhaleID;
+
+			// IhaleID'ye ait diğer teklifleri silme işlemi
+			var digerTeklifler = await _context.BireyselAracTeklif
+				.Where(t => t.IhaleID == ihaleID && t.TeklifID != id)
+				.ToListAsync();
+
+			_context.BireyselAracTeklif.RemoveRange(digerTeklifler);
+			await _context.SaveChangesAsync();
+
+			return Ok();
+		}
 	}
 }

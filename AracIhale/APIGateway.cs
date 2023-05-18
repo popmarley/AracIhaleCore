@@ -235,8 +235,15 @@ namespace AracIhale.UI
             return response.IsSuccessStatusCode;
         }
 
+		public async Task<bool> OnaylaIhaleTeklif(int id)
+		{
+			var apiUrl = $"http://localhost:36989/api/IhaleTeklif/{id}/onayla";
 
-    }
-    }
+			var response = await httpClient.GetAsync(apiUrl);
+
+			return response.IsSuccessStatusCode;
+		}
+	}
+}
 
 
