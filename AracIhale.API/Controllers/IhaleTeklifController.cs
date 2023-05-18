@@ -119,7 +119,7 @@ namespace AracIhale.API.Controllers
 			var onaylananTeklif = new OnaylananTeklif
 			{
 				
-				TeklifID = teklif.TeklifID,
+				//TeklifID = teklif.TeklifID,
 				KullaniciID = teklif.KullaniciID,
 				IhaleID = teklif.IhaleID,
 				OnaylanmaTarihi = DateTime.UtcNow,
@@ -128,7 +128,9 @@ namespace AracIhale.API.Controllers
 			};
 
 			_context.OnaylananTeklif.Add(onaylananTeklif);
+			_context.BireyselAracTeklif.Remove(teklif); // BireyselAracTeklif tablosundan silme işlemi
 			await _context.SaveChangesAsync();
+
 
 			return Ok();
 		}
