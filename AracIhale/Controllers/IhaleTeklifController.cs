@@ -85,6 +85,13 @@ namespace AracIhale.UI.Controllers
 			}
 		}
 
-	}
+        [HttpGet]
+        public async Task<IActionResult> OnaylananTeklifler(int id)
+        {
+            var ihaleler = await _apiGateway.ListIhaleTeklifOnay();
+            return View(ihaleler);
+        }
+
+    }
 }
 

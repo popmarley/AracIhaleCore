@@ -8,7 +8,7 @@ namespace AracIhale.UI.Models.VM
         public AracOzellik()
         {
             Araclars = new HashSet<Araclar>();
-            IhaleListesis = new HashSet<IhaleListesi>();
+            IhaleListesis = new HashSet<IhaleListesiVM>();
         }
 
         public int AracOzellikID { get; set; }
@@ -50,6 +50,6 @@ namespace AracIhale.UI.Models.VM
         //public virtual Yil Yil { get; set; }
 
 
-        public virtual ICollection<IhaleListesi> IhaleListesis { get; set; }
+        public virtual ICollection<IhaleListesiVM> IhaleListesis { get; set; }
     }
 }

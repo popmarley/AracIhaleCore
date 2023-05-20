@@ -122,7 +122,7 @@ namespace AracIhale.API.Controllers
 				//TeklifID = teklif.TeklifID,
 				KullaniciID = teklif.KullaniciID,
 				IhaleID = teklif.IhaleID,
-				OnaylanmaTarihi = DateTime.UtcNow,
+				OnaylanmaTarihi = DateTime.Now,
 				TeklifFiyati=teklif.TeklifFiyati,
 
 			};

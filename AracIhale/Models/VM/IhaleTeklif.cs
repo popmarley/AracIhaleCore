@@ -17,7 +17,7 @@ namespace AracIhale.UI.Models.VM
 
         public int? IhaleID { get; set; }
 
-        public virtual IhaleListesi IhaleListesi { get; set; }
+        public virtual IhaleListesiVM IhaleListesi { get; set; }
 
         public virtual Kullanici Kullanici { get; set; }
     }

@@ -7,7 +7,7 @@ namespace AracIhale.UI.Models.VM
     {
         public IhaleStatu()
         {
-            IhaleListesis = new HashSet<IhaleListesi>();
+            IhaleListesis = new HashSet<IhaleListesiVM>();
         }
 
         public int IhaleStatuID { get; set; }
@@ -15,6 +15,6 @@ namespace AracIhale.UI.Models.VM
         [StringLength(50)]
         public string IhaleStatuAdi { get; set; }
 
-        public virtual ICollection<IhaleListesi> IhaleListesis { get; set; }
+        public virtual ICollection<IhaleListesiVM> IhaleListesis { get; set; }
     }
 }

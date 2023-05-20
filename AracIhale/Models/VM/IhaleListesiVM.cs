@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AracIhale.UI.Models.VM
 {
-    public class IhaleListesi
+    public class IhaleListesiVM
     {
 		[Key]
 		public int IhaleID { get; set; }
@@ -46,7 +46,9 @@ namespace AracIhale.UI.Models.VM
         public virtual IhaleStatu IhaleStatu { get; set; }
         public virtual ICollection<BireyselAracTeklif> BireyselAracTeklifs { get; set; }
 
+        public virtual ICollection<OnaylananTeklifVM> OnaylananTeklifs { get; set; }
 
-
+        public virtual Kullanici Kullanici { get; set; }
+     
     }
 }

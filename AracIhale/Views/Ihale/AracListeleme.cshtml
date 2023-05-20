@@ -1,6 +1,7 @@
-﻿@model IEnumerable<AracIhale.UI.Models.VM.IhaleListesi>
+﻿@model IEnumerable<AracIhale.UI.Models.VM.IhaleListesiVM>
 @{
     int sayac = 1;
+    int index = 1;
 }
 
 <form class="bg-white rounded p-3" action="@Url.Action("Listele", "Ihale")" method="post">
@@ -97,3 +98,21 @@
     </tbody>
 </table>
 
+<br />
+
+<a href="@Url.Action("OnaylananTeklifler", "Ihaleteklif")" class="btn btn-success me-2">İhale Listesine Dön</a>
+
+@*<table class="table">
+ <h4 style="color:dimgrey;">İhalesi Onaylanan Kişi Listesi</h4>
+    <thead>
+       @foreach (var item in Model)
+        {
+            <tr>
+                <td>@index Numaralı "@item.IhaleAdi" ihalesini kazanan kişi:@item.Kullanici.Ad  </td>
+            </tr>
+            index++;
+        }
+    </thead>
+
+</table>
+*@

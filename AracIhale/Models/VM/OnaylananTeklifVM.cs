@@ -3,19 +3,22 @@ using System;
 
 namespace AracIhale.UI.Models.VM
 {
-    public class BireyselAracTeklif
+    public class OnaylananTeklifVM
     {
-        [Key]
-        public int TeklifID { get; set; }
+        public int OnaylananTeklifID { get; set; }
+
+        public int? TeklifID { get; set; }
 
         public int? KullaniciID { get; set; }
+
+        public int? IhaleID { get; set; }
+
+        public DateTime? OnaylanmaTarihi { get; set; }
 
         [StringLength(50)]
         public string TeklifFiyati { get; set; }
 
-        public DateTime? TeklifTarihi { get; set; }
-
-        public int? IhaleID { get; set; }
+        public virtual BireyselAracTeklif BireyselAracTeklif { get; set; }
 
         public virtual IhaleListesiVM IhaleListesi { get; set; }
 

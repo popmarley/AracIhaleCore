@@ -14,10 +14,11 @@ namespace AracIhale.UI
     {
         private string url = "http://localhost:36989/api/Ihale";
         private string ihaleTeklifUrl = "http://localhost:36989/api/IhaleTeklif";
+        private string ihaleTeklifOnayUrl = "http://localhost:36989/api/IhaleTeklifOnay";
         private HttpClient httpClient = new HttpClient();
-        public async Task<List<IhaleListesi>> ListIhale()
+        public async Task<List<IhaleListesiVM>> ListIhale()
         {
-            List<IhaleListesi> ihale = new List<IhaleListesi>();
+            List<IhaleListesiVM> ihale = new List<IhaleListesiVM>();
             if (url.Trim().Substring(0, 5).ToLower() == "https")
             {
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
@@ -29,7 +30,7 @@ namespace AracIhale.UI
                 if (response.IsSuccessStatusCode)
                 {
                     string result = await response.Content.ReadAsStringAsync();
-                    var datacol = JsonConvert.DeserializeObject<List<IhaleListesi>>(result);
+                    var datacol = JsonConvert.DeserializeObject<List<IhaleListesiVM>>(result);
                     if (datacol != null)
                     {
                         ihale = datacol;
@@ -50,7 +51,7 @@ namespace AracIhale.UI
 
             return ihale;
         }
-        public IhaleListesi CreateIhale(IhaleListesi ihale)
+        public IhaleListesiVM CreateIhale(IhaleListesiVM ihale)
         {
             if (url.Trim().Substring(0, 5).ToLower() == "https")
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
@@ -64,7 +65,7 @@ namespace AracIhale.UI
                 if (response.IsSuccessStatusCode)
                 {
                     string result = response.Content.ReadAsStringAsync().Result;
-                    var data = JsonConvert.DeserializeObject<IhaleListesi>(result);
+                    var data = JsonConvert.DeserializeObject<IhaleListesiVM>(result);
                     if (data != null)
                         ihale = data;
                 }
@@ -137,15 +138,7 @@ namespace AracIhale.UI
             return string.Empty;
         }
 
-        //public async Task<bool> CreateIhale(IhaleListesi ihale)
-        //{
-        //    var apiUrl = "http://localhost:36989/api/Ihale";
-        //    var content = new StringContent(JsonConvert.SerializeObject(ihale), Encoding.UTF8, "application/json");
-
-        //    var response = await httpClient.PostAsync(apiUrl, content);
-
-        //    return response.IsSuccessStatusCode;
-        //}
+      
         public async Task<bool> CreateIhaleTeklif(BireyselAracTeklif ihale)
         {
             var apiUrl = "http://localhost:36989/api/IhaleTeklif";
@@ -155,7 +148,7 @@ namespace AracIhale.UI
 
             return response.IsSuccessStatusCode;
         }
-        public async Task<IhaleListesi> GetIhaleById(int IhaleID)
+        public async Task<IhaleListesiVM> GetIhaleById(int IhaleID)
         {
             if (url.Trim().Substring(0, 5).ToLower() == "https")
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
@@ -167,7 +160,7 @@ namespace AracIhale.UI
                 if (response.IsSuccessStatusCode)
                 {
                     string result = await response.Content.ReadAsStringAsync();
-                    var data = JsonConvert.DeserializeObject<IhaleListesi>(result);
+                    var data = JsonConvert.DeserializeObject<IhaleListesiVM>(result);
                     return data;
                 }
                 else
@@ -188,7 +181,7 @@ namespace AracIhale.UI
             HttpResponseMessage response = await httpClient.DeleteAsync($"{ihaleTeklifUrl}/{id}");
             return response.IsSuccessStatusCode;
         }
-        public async Task<IhaleListesi> GetIhale(int id)
+        public async Task<IhaleListesiVM> GetIhale(int id)
         {
             var apiUrl = "http://localhost:36989/api/Ihale/" + id;
 
@@ -197,7 +190,7 @@ namespace AracIhale.UI
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
-                var ihale = JsonConvert.DeserializeObject<IhaleListesi>(content);
+                var ihale = JsonConvert.DeserializeObject<IhaleListesiVM>(content);
                 return ihale;
             }
 
@@ -218,7 +211,7 @@ namespace AracIhale.UI
 
             return null;
         }
-        public async Task<bool> UpdateIhale(IhaleListesi ihale)
+        public async Task<bool> UpdateIhale(IhaleListesiVM ihale)
         {
             var apiUrl = "http://localhost:36989/api/Ihale/" + ihale.IhaleID;
             var content = new StringContent(JsonConvert.SerializeObject(ihale), Encoding.UTF8, "application/json");
@@ -243,7 +236,46 @@ namespace AracIhale.UI
 
 			return response.IsSuccessStatusCode;
 		}
-	}
+
+        public async Task<List<OnaylananTeklifVM>> ListIhaleTeklifOnay()
+        {
+            List<OnaylananTeklifVM> ihale = new List<OnaylananTeklifVM>();
+            if (ihaleTeklifOnayUrl.Trim().Substring(0, 5).ToLower() == "https")
+            {
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            }
+
+            try
+            {
+                HttpResponseMessage response = await httpClient.GetAsync(ihaleTeklifOnayUrl);
+                if (response.IsSuccessStatusCode)
+                {
+                    string result = await response.Content.ReadAsStringAsync();
+                    var datacol = JsonConvert.DeserializeObject<List<OnaylananTeklifVM>>(result);
+                    if (datacol != null)
+                    {
+                        ihale = datacol;
+                    }
+                }
+                else
+                {
+
+                    string result = await response.Content.ReadAsStringAsync();
+                    throw new Exception("Error: " + result);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error: " + ex.Message);
+            }
+            finally { }
+
+            return ihale;
+        }
+
+
+
+    }
 }
 
 

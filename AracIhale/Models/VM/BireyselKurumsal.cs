@@ -8,7 +8,7 @@ namespace AracIhale.UI.Models.VM
         public BireyselKurumsal()
         {
             Araclars = new HashSet<Araclar>();
-            IhaleListesis = new HashSet<IhaleListesi>();
+            IhaleListesis = new HashSet<IhaleListesiVM>();
             Kullanicis = new HashSet<Kullanici>();
         }
 
@@ -22,7 +22,7 @@ namespace AracIhale.UI.Models.VM
         public virtual ICollection<Araclar> Araclars { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<IhaleListesi> IhaleListesis { get; set; }
+        public virtual ICollection<IhaleListesiVM> IhaleListesis { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Kullanici> Kullanicis { get; set; }

@@ -47,6 +47,7 @@ namespace AracIhale.API.Controllers
                 Araclar=c.Araclar,
          
                
+               
 
             }).ToListAsync();
         }
@@ -68,7 +69,6 @@ namespace AracIhale.API.Controllers
         {
             foreach (var ihale in ihaleler)
             {
-                // Her ihale için hata kontrolü yapabilirsiniz
 
                 _context.Add(ihale);
             }
@@ -79,23 +79,24 @@ namespace AracIhale.API.Controllers
         }
 
 
+
         [HttpPut("{id}")]
-		public async Task<IActionResult> UpdateIhale(int id, IhaleListesi ihale)
-		{
-			if (id != ihale.IhaleID)
-			{
-				return BadRequest("Invalid Ihale ID");
-			}
+        public async Task<IActionResult> UpdateIhale(int id, IhaleListesi ihale)
+        {
+            if (id != ihale.IhaleID)
+            {
+                return BadRequest("Invalid Ihale ID");
+            }
 
-			// AracID sütunu burada güncellenmeli veya kontrol edilmeli (eğer kullanılmıyorsa).
+            
 
-			_context.Entry(ihale).State = EntityState.Modified;
-			await _context.SaveChangesAsync();
+            _context.Entry(ihale).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
 
-			return Ok();
-		}
+            return Ok();
+        }
 
-		[HttpDelete("{id}")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteIhale(int id)
         {
             var ihale = await _context.IhaleListesi.FindAsync(id);

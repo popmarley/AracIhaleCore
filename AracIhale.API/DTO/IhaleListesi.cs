@@ -54,5 +54,6 @@ namespace AracIhale.API.DTO
 
 		public virtual ICollection<OnaylananTeklif> OnaylananTeklifs { get; set; }
 
-	}
+       
+    }
 }

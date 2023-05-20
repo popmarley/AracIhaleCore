@@ -43,11 +43,11 @@ namespace AracIhale.UI.Controllers
 		[HttpGet]
         public IActionResult Create()
         {
-            IhaleListesi ihaleler = new IhaleListesi();
+            IhaleListesiVM ihaleler = new IhaleListesiVM();
             return View(ihaleler);
         }
         [HttpPost]
-        public IActionResult Create(IhaleListesi ihale)
+        public IActionResult Create(IhaleListesiVM ihale)
         {
             _apiGateway.CreateIhale(ihale);
             return RedirectToAction("AracListeleme");
@@ -71,7 +71,7 @@ namespace AracIhale.UI.Controllers
         public async Task<IActionResult> Edit(int id)
         {
 
-            IhaleListesi ihaleler = await _apiGateway.GetIhale(id);
+            IhaleListesiVM ihaleler = await _apiGateway.GetIhale(id);
             if (ihaleler == null)
             {
                 return NotFound();
@@ -80,7 +80,7 @@ namespace AracIhale.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(IhaleListesi ihaleler)
+        public async Task<IActionResult> Edit(IhaleListesiVM ihaleler)
         {
             if (ModelState.IsValid)
             {
@@ -100,9 +100,9 @@ namespace AracIhale.UI.Controllers
         }
 
 		[HttpPost]
-		public async Task<IActionResult> Listele(IhaleListesi ihale, string ihaleAdi, int aracTuru, int aracDurumu)
+		public async Task<IActionResult> Listele(IhaleListesiVM ihale, string ihaleAdi, int aracTuru, int aracDurumu)
 		{
-			List<IhaleListesi> ihaleler = await _apiGateway.ListIhale();
+			List<IhaleListesiVM> ihaleler = await _apiGateway.ListIhale();
 
 			if (!string.IsNullOrEmpty(ihaleAdi))
 			{
@@ -123,9 +123,9 @@ namespace AracIhale.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> IhaleListeFiltrele(IhaleListesi ihale, string ihaleAdi, int aracTuru, int aracDurumu)
+        public async Task<IActionResult> IhaleListeFiltrele(IhaleListesiVM ihale, string ihaleAdi, int aracTuru, int aracDurumu)
         {
-            List<IhaleListesi> ihaleler = await _apiGateway.ListIhale();
+            List<IhaleListesiVM> ihaleler = await _apiGateway.ListIhale();
 
             if (!string.IsNullOrEmpty(ihaleAdi))
             {

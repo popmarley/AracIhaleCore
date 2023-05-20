@@ -1,0 +1,23 @@
+﻿@model IEnumerable<AracIhale.UI.Models.VM.OnaylananTeklifVM>
+
+@{
+    int index = 1;
+}
+
+
+<table class="table">
+    <h4 style="color:dimgrey;">İhalesi Onaylanan Kişi Listesi</h4>
+    <thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@index Numaralı "@item.IhaleListesi.IhaleAdi" ihalesini kazanan kişi:@item.Kullanici.Ad  </td>
+            </tr>
+            index++;
+        }
+    </thead>
+
+</table>
+
+<br />
+<a href="@Url.Action("AracListeleme", "Ihale")" class="btn btn-secondary">İhale Listesine Dön</a>
