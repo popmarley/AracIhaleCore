@@ -24,7 +24,13 @@
 				<span asp-validation-for="KurumsalSirketAdi" class="text-danger"></span>
 			</div>
 			<div class="form-group">
-				<input asp-for="IhaleStatuID" class="form-control" type="hidden" />
+				<label for="IhaleStatuID" class="form-label">Statüsü</label>
+				<select asp-for="IhaleStatuID" class="form-control">
+					<option value="1">Başlamadı</option>
+					<option value="2">Başladı</option>
+					<option value="3">Bitti</option>
+					<option value="4">İptal</option>
+				</select>
 				<span asp-validation-for="IhaleStatuID" class="text-danger"></span>
 			</div>
 			<div class="form-group">

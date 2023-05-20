@@ -42,7 +42,7 @@
     <div class="row">
         @foreach (var item in Model)
         {
-            <div class="col-md-4 mb-4">
+            <div class="col-md-3 mb-4">
                 <div class="card">
                     <img src="https://c4.wallpaperflare.com/wallpaper/499/113/152/toyota-supra-neon-lights-4k-wallpaper-preview.jpg" class="card-img-top" @*alt="@item.AracOzellik.AracMarka.MarkaAdi @item.AracOzellik.AracModel.ModelAdi"*@>
                     <div class="card-body">
@@ -79,5 +79,5 @@
 
 <br />
 
-<a href="@Url.Action("OnaylananTeklifler", "Ihaleteklif")" class="btn btn-success me-2">Onaylanmış İhale Listesi</a>
+<a href="@Url.Action("OnaylananTeklifler", "Ihaleteklif")" class="btn btn-success me-2">Onaylanan İhaleler</a>
 

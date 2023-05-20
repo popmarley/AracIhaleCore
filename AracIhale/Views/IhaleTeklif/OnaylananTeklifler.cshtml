@@ -5,19 +5,25 @@
 }
 
 
-<table class="table">
-    <h4 style="color:dimgrey;">İhalesi Onaylanan Kişi Listesi</h4>
-    <thead>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@index Numaralı "@item.IhaleListesi.IhaleAdi" ihalesini kazanan kişi:@item.Kullanici.Ad  </td>
-            </tr>
-            index++;
-        }
-    </thead>
 
-</table>
 
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-5">
+  
+    @foreach (var item in Model)
+    {
+        <div class="col mt-4">
+            <div class="card">
+                <img src="https://c4.wallpaperflare.com/wallpaper/499/113/152/toyota-supra-neon-lights-4k-wallpaper-preview.jpg" class="card-img-top" alt="Görsel">
+                <div class="card-body">
+                    <h5 class="card-title text-center text-dark" style="font-size: 16px;">@index Numaralı</h5>
+                    <h5 class="card-title text-center text-dark" style="font-size: 16px;"> ☞ @item.IhaleListesi.IhaleAdi ☜</h5>
+                    <h5 class="card-title text-center text-dark" style="font-size: 16px;">İhalesini Kazanan Kişi</h5>
+                    <p class="card-text text-center text-dark" style="font-size: 14px;"> ➡︎ @item.Kullanici.Ad ⬅︎ </p>
+                </div>
+            </div>
+        </div>
+        index++;
+    }
+</div>
 <br />
 <a href="@Url.Action("AracListeleme", "Ihale")" class="btn btn-secondary">İhale Listesine Dön</a>
