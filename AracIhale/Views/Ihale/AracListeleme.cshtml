@@ -37,82 +37,47 @@
 </form>
 <br />
 
-<table class="table">
-    <h4 style="color:dimgrey;">İhale Araç Listesi</h4>
-    <thead>
-        <tr>
-            <th>İhale Numarası</th>
-            @*<th>Araç Markası</th>
-            <th>Modeli</th>*@
-            <th>Bireysel/Kurumsal</th>
-            <th>Statüsü</th>
-            <th>İhale Başlangıç Fiyatı</th>
-            <th>Mininum Alım Fiyatı</th>
-            <th>Aksiyon</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
+<div class="container my-4">
+    <h4 class="text-white mb-3">İhale Araç Listesi</h4>
+    <div class="row">
         @foreach (var item in Model)
         {
-            <tr>
-                <td>@sayac</td>
-                @*<td>@item.AracOzellik.AracMarka.MarkaAdi</td>
-                <td>@item.AracOzellik.AracModel.ModelAdi</td>*@
-                <td>
-                    @if (item.BireyselKurumsalID == 1)
-                    {
-                        @:Bireysel
-                    }
-                    else if (item.BireyselKurumsalID == 2)
-                    {
-                        @:Kurumsal
-                    }
-                </td>
-                <td>
-                    @switch (item.IhaleStatuID)
-                    {
-                        case 1:
-                            @:Başlamadı
-                            break;
-                        case 2:
-                            @:Başladı
-                            break;
-                        case 3:
-                            @:Bitti
-                            break;
-                        case 4:
-                            @:İptal
-                            break;
-                    }
-                </td>
-                <td>@item.IhaleBaslangicFiyati ₺</td>
-                <td>@item.MinimumAlimFiyati ₺</td>
-                <td>
-                    <a href="@Url.Action("TeklifVer", "IhaleTeklif", new { id = item.IhaleID })" class="btn btn-success me-2">Teklif Ver</a>
-                    </td>
-                <td></td>
-            </tr>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="https://c4.wallpaperflare.com/wallpaper/499/113/152/toyota-supra-neon-lights-4k-wallpaper-preview.jpg" class="card-img-top" @*alt="@item.AracOzellik.AracMarka.MarkaAdi @item.AracOzellik.AracModel.ModelAdi"*@>
+                    <div class="card-body">
+                        <h5 class="card-title text-dark"><strong>İhale Numarası:</strong> @sayac</h5>
+                        <p class="card-text text-dark">
+                            <strong>Bireysel/Kurumsal:</strong> @(item.BireyselKurumsalID == 1 ? "Bireysel" : "Kurumsal") <br />
+                            <strong>Statüsü:</strong>
+                            @switch (item.IhaleStatuID)
+                            {
+                                case 1:
+                                    @:Başlamadı
+                                    break;
+                                case 2:
+                                    @:Başladı
+                                    break;
+                                case 3:
+                                    @:Bitti
+                                    break;
+                                case 4:
+                                    @:İptal
+                                    break;
+                            } <br />
+                            <strong>İhale Başlangıç Fiyatı:</strong> @item.IhaleBaslangicFiyati ₺ <br />
+                            <strong>Mininum Alım Fiyatı:</strong> @item.MinimumAlimFiyati ₺
+                        </p>
+                        <a href="@Url.Action("TeklifVer", "IhaleTeklif", new { id = item.IhaleID })" class="btn btn-success">Teklif Ver</a>
+                    </div>
+                </div>
+            </div>
             sayac++;
         }
-    </tbody>
-</table>
+    </div>
+</div>
 
 <br />
 
-<a href="@Url.Action("OnaylananTeklifler", "Ihaleteklif")" class="btn btn-success me-2">İhale Listesine Dön</a>
+<a href="@Url.Action("OnaylananTeklifler", "Ihaleteklif")" class="btn btn-success me-2">Onaylanmış İhale Listesi</a>
 
-@*<table class="table">
- <h4 style="color:dimgrey;">İhalesi Onaylanan Kişi Listesi</h4>
-    <thead>
-       @foreach (var item in Model)
-        {
-            <tr>
-                <td>@index Numaralı "@item.IhaleAdi" ihalesini kazanan kişi:@item.Kullanici.Ad  </td>
-            </tr>
-            index++;
-        }
-    </thead>
-
-</table>
-*@
