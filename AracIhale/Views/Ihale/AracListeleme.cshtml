@@ -1,97 +1,97 @@
 ﻿@model IEnumerable<AracIhale.UI.Models.VM.IhaleListesiVM>
 @{
-    int sayac = 1;
-    int index = 1;
+	int sayac = 1;
+	int index = 1;
 }
 
 <form class="bg-white rounded p-3" action="@Url.Action("Listele", "Ihale")" method="post">
-    <h4 style="color:dimgrey;">Kriterler</h4>
-    <div class="row">
-        <div class="col-md-4 mb-4">
-            <label for="ihaleNumarasi" class="form-label">İhale Numarası</label>
-            <input type="text" class="form-control" id="ihaleNumarasi" name="ihaleNumarasi" placeholder="İhale Numarası">
-        </div>
-        <div class="col-md-4 mb-4">
-            <label for="aracTuru" class="form-label">Bireysel/Kurumsal</label>
-            <select class="form-control" id="aracTuru" name="aracTuru">
-                <option value="">Seçiniz...</option>
-                <option value="1">Bireysel</option>
-                <option value="2">Kurumsal</option>
-            </select>
-        </div>
-        <div class="col-md-4 mb-4">
-            <label for="aracDurumu" class="form-label">Statüsü</label>
-            <select class="form-control" id="aracDurumu" name="aracDurumu">
-                <option value="">Seçiniz...</option>
-                <option value="1">Başlamadı</option>
-                <option value="2">Başladı</option>
-                <option value="3">Bitti</option>
-                <option value="4">İptal</option>
-            </select>
-        </div>
-    </div>
-    <div class="col-md-12 d-flex justify-content-end">
-        <a href="@Url.Action("AracListeleme", "Ihale")" class="btn btn-secondary ml-2">Sıfırla</a>
-        <button type="submit" class="btn btn-primary">Listele</button>
-    </div>
+	<h4 style="color:dimgrey;">Kriterler</h4>
+	<div class="row">
+		<div class="col-md-4 mb-4">
+			<label for="ihaleNumarasi" class="form-label">İhale Numarası</label>
+			<input type="text" class="form-control" id="ihaleNumarasi" name="ihaleNumarasi" placeholder="İhale Numarası">
+		</div>
+		<div class="col-md-4 mb-4">
+			<label for="aracTuru" class="form-label">Bireysel/Kurumsal</label>
+			<select class="form-control" id="aracTuru" name="aracTuru">
+				<option value="">Seçiniz...</option>
+				<option value="1">Bireysel</option>
+				<option value="2">Kurumsal</option>
+			</select>
+		</div>
+		<div class="col-md-4 mb-4">
+			<label for="aracDurumu" class="form-label">Statüsü</label>
+			<select class="form-control" id="aracDurumu" name="aracDurumu">
+				<option value="">Seçiniz...</option>
+				<option value="1">Başlamadı</option>
+				<option value="2">Başladı</option>
+				<option value="3">Bitti</option>
+				<option value="4">İptal</option>
+			</select>
+		</div>
+	</div>
+	<div class="col-md-12 d-flex justify-content-end">
+		<a href="@Url.Action("AracListeleme", "Ihale")" class="btn btn-secondary ml-2">Sıfırla</a>
+		<button type="submit" class="btn btn-primary">Listele</button>
+	</div>
 </form>
 <br />
 
 <div class="container my-4">
-    <h4 class="text-white mb-3">İhale Araç Listesi</h4>
-    <div class="row">
-        @foreach (var item in Model)
-        {
-            <div class="col-md-3 mb-4">
-                <div class="card">
-                    <div id="carousel-@item.IhaleID" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                            @for (int i = 0; i < 5; i++)
-                            {
-                                <div class="carousel-item @(i == 0 ? "active" : "")">
-                                    <img src="https://c4.wallpaperflare.com/wallpaper/499/113/152/toyota-supra-neon-lights-4k-wallpaper-preview.jpg" class="card-img-top" @*alt="@item.AracOzellik.AracMarka.MarkaAdi @item.AracOzellik.AracModel.ModelAdi"*@>
-                                </div>
-                            }
-                        </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel-@item.IhaleID" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carousel-@item.IhaleID" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title text-dark"><strong>İhale Numarası:</strong> @sayac</h5>
-                        <p class="card-text text-dark">
-                            <strong>Bireysel/Kurumsal:</strong> @(item.BireyselKurumsalID == 1 ? "Bireysel" : "Kurumsal") <br />
-                            <strong>Statüsü:</strong>
-                            @switch (item.IhaleStatuID)
-                            {
-                                case 1:
-                                    @:Başlamadı
-                                    break;
-                                case 2:
-                                    @:Başladı
-                                    break;
-                                case 3:
-                                    @:Bitti
-                                    break;
-                                case 4:
-                                    @:İptal
-                                    break;
-                            } <br />
-                            <strong>İhale Başlangıç Fiyatı:</strong> @item.IhaleBaslangicFiyati ₺ <br />
-                            <strong>Mininum Alım Fiyatı:</strong> @item.MinimumAlimFiyati ₺
-                        </p>
-                        <a href="@Url.Action("TeklifVer", "IhaleTeklif", new { id = item.IhaleID })" class="btn btn-success">Teklif Ver</a>
-                    </div>
-                </div>
-            </div>
-            sayac++;
-        }
-    </div>
+	<h4 class="text-white mb-3">İhale Araç Listesi</h4>
+	<div class="row">
+		@foreach (var item in Model)
+		{
+			<div class="col-md-3 mb-4">
+				<div class="card">
+					<div id="carousel-@item.IhaleID" class="carousel slide" data-bs-ride="carousel">
+						<div class="carousel-inner">
+							@for (int i = 0; i < 5; i++)
+							{
+								<div class="carousel-item @(i == 0 ? "active" : "")">
+									<img src="https://c4.wallpaperflare.com/wallpaper/499/113/152/toyota-supra-neon-lights-4k-wallpaper-preview.jpg" class="card-img-top" @*alt="@item.AracOzellik.AracMarka.MarkaAdi @item.AracOzellik.AracModel.ModelAdi"*@>
+								</div>
+							}
+						</div>
+						<button class="carousel-control-prev" type="button" data-bs-target="#carousel-@item.IhaleID" data-bs-slide="prev">
+							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Previous</span>
+						</button>
+						<button class="carousel-control-next" type="button" data-bs-target="#carousel-@item.IhaleID" data-bs-slide="next">
+							<span class="carousel-control-next-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Next</span>
+						</button>
+					</div>
+					<div class="card-body">
+						<h5 class="card-title text-dark"><strong>İhale Numarası:</strong> @sayac</h5>
+						<p class="card-text text-dark">
+							<strong>Bireysel/Kurumsal:</strong> @(item.BireyselKurumsalID == 1 ? "Bireysel" : "Kurumsal") <br />
+							<strong>Statüsü:</strong>
+							@switch (item.IhaleStatuID)
+							{
+								case 1:
+									@:Başlamadı
+									break;
+								case 2:
+									@:Başladı
+									break;
+								case 3:
+									@:Bitti
+									break;
+								case 4:
+									@:İptal
+									break;
+							} <br />
+							<strong>İhale Başlangıç Fiyatı:</strong> @item.IhaleBaslangicFiyati ₺ <br />
+							<strong>Mininum Alım Fiyatı:</strong> @item.MinimumAlimFiyati ₺
+						</p>
+						<a href="@Url.Action("TeklifVer", "IhaleTeklif", new { id = item.IhaleID })" class="btn btn-success">Teklif Ver</a>
+					</div>
+				</div>
+			</div>
+			sayac++;
+		}
+	</div>
 </div>
 
 <br />
