@@ -10,7 +10,7 @@
 		<h4 style="color:dimgrey;">İhale Teklif Listesi</h4>
 		<thead>
 			<tr>
-				<th>İhale Numarası</th>
+				<th>Teklif Numarası</th>
 				<th>İhale Adı</th>
 				<th>Teklif Veren Kullanıcı</th>
 				<th>İhale Başlangıç Fiyatı</th>
@@ -22,7 +22,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			@foreach (var item in Model)
+			@foreach (var item in Model.OrderBy(i => i.IhaleListesi.IhaleAdi).ThenByDescending(i => i.TeklifFiyati))
 			{
 				<tr>
 					<td>@sayac</td>
