@@ -42,15 +42,21 @@
 	<div class="row">
 		@foreach (var item in Model)
 		{
-			<div class="col-md-3 mb-4">
+			<div class="col-md-4 mb-4">
 				<div class="card">
 					<div id="carousel-@item.IhaleID" class="carousel slide" data-bs-ride="carousel">
 						<div class="carousel-inner">
-							@for (int i = 0; i < 5; i++)
-							{
-								<div class="carousel-item @(i == 0 ? "active" : "")">
-									<img src="https://c4.wallpaperflare.com/wallpaper/499/113/152/toyota-supra-neon-lights-4k-wallpaper-preview.jpg" class="card-img-top" @*alt="@item.AracOzellik.AracMarka.MarkaAdi @item.AracOzellik.AracModel.ModelAdi"*@>
-								</div>
+							@{
+								var images = new List<string>() { item.Araclar.Gorsel1, item.Araclar.Gorsel2, item.Araclar.Gorsel3, item.Araclar.Gorsel4, item.Araclar.Gorsel5 };
+								for (int i = 0; i < images.Count; i++)
+								{
+									if (!string.IsNullOrEmpty(images[i]))
+									{
+										<div class="carousel-item @(i == 0 ? "active" : "")">
+											<img src="@images[i]" class="card-img-top" >
+										</div>
+									}
+								}
 							}
 						</div>
 						<button class="carousel-control-prev" type="button" data-bs-target="#carousel-@item.IhaleID" data-bs-slide="prev">
