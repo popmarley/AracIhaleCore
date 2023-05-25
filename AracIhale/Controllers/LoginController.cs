@@ -60,7 +60,7 @@ namespace AracIhale.UI.Controllers
 			else
 			{
 				// Giriş başarısız oldu, hata mesajını göster ve kullanıcıyı geri yönlendir
-				ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+				ViewData["ErrorMessage"] = "Invalid login attempt."; ;
 				return View(model);
 			}
 
