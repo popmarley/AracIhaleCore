@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<AracIhale.UI.Models.VM.IhaleListesiVM>
 @{
-	int sayac = 1;
+	
 }
 
 
@@ -69,7 +69,7 @@
 						</button>
 					</div>
 					<div class="card-body">
-						<h6 class="card-title text-dark"><strong>İhale Numarası:</strong> @sayac</h6>
+						<h6 class="card-title text-dark"><strong>İhale Numarası:</strong> @item.IhaleID</h6>
 						<h5 class="card-title text-dark"><strong>İhale Adı:</strong> @item.IhaleAdi</h5>
 						<p class="card-text text-dark">
 							<strong>Bireysel/Kurumsal:</strong> @(item.BireyselKurumsalID == 1 ? "Bireysel" : "Kurumsal") <br />
@@ -96,7 +96,6 @@
 					</div>
 				</div>
 			</div>
-			sayac++;
 		}
 	</div>
 </div>

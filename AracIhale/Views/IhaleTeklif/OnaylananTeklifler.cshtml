@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<AracIhale.UI.Models.VM.OnaylananTeklifVM>
 
 @{
-    int index = 1;
+ 
    
 }
 
@@ -14,7 +14,7 @@
             <div class="card">
                 <img src="https://c0.wallpaperflare.com/preview/1008/251/642/award-business-winner-recognition.jpg" class="card-img-top" alt="Görsel">
                 <div class="card-body">
-                    <h5 class="card-title text-center text-dark" style="font-size: 16px;">@index Numaralı</h5>
+                    <h5 class="card-title text-center text-dark" style="font-size: 16px;">@item.IhaleID Numaralı</h5>
                     <h5 class="card-title text-center text-dark" style="font-size: 16px;"> ☞ @item.IhaleListesi.IhaleAdi ☜</h5>
                     <h5 class="card-title text-center text-dark" style="font-size: 16px;">İhalesini Kazanan Kişi</h5>
                     <p class="card-text text-center text-dark" style="font-size: 14px;"> ➡︎ @item.Kullanici.Ad ⬅︎ </p>
@@ -22,7 +22,6 @@
                 </div>
             </div>
         </div>
-        index++;
         
     }
 </div>
