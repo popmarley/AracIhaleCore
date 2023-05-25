@@ -69,11 +69,11 @@
 					</div>
 				</div>
 				<div class="navbar-nav w-100">
-					<a href="/Ihale/AracListeleme" class="nav-item nav-link"><i class="fa fa-list me-2"></i>İhale Araç Listesi</a>
+					<a href="/Ihale/AracListeleme" class="nav-item nav-link @(HttpContextAccessor.HttpContext.Request.Path.Value.Contains("/Ihale/AracListeleme") ? "active" : "")"><i class="fa fa-list me-2"></i>İhale Araç Listesi</a>
 					@if (rolID == 1 || rolID == 3)
 					{
-						<a href="/Ihale/IhaleListeleme" class="nav-item nav-link"><i class="fa fa-th me-2"></i>İhale Listesi</a>
-						<a href="/IhaleTeklif/Teklifler" class="nav-item nav-link"><i class="fa fa-th me-2"></i>İhale Teklif Listesi</a>
+						<a href="/Ihale/IhaleListeleme" class="nav-item nav-link @(HttpContextAccessor.HttpContext.Request.Path.Value.Contains("/Ihale/IhaleListeleme") ? "active" : "") "><i class="fa fa-th me-2"></i>İhale Listesi</a>
+							<a href="/IhaleTeklif/Teklifler" class="nav-item nav-link @(HttpContextAccessor.HttpContext.Request.Path.Value.Contains("/IhaleTeklif/Teklifler") ? "active" : "") "><i class="fa fa-th me-2"></i>İhale Teklif Listesi</a>
 					}
 				</div>
 			</nav>
@@ -93,7 +93,7 @@
 			@await Html.PartialAsync("_Footer")
 		</div>
 	</div>
-	<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+	<a href="#" id="scrollButton" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i id="arrowIcon" class="bi bi-arrow-up"></i></a>
 	@await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
@@ -110,3 +110,44 @@
 
 <!-- Template Javascript -->
 <script src="/Contents/darkpan-1.0.0/js/main.js"></script>
+
+
+<script>
+	$(document).ready(function () {
+		// Scroll position
+		var scrollPosition = $(window).scrollTop();
+
+		// Initial check
+		checkScrollPosition(scrollPosition);
+
+		// Check scroll position on scroll
+		$(window).scroll(function () {
+			scrollPosition = $(this).scrollTop();
+			checkScrollPosition(scrollPosition);
+		});
+
+		// Scroll button click
+		$('#scrollButton').click(function (e) {
+			e.preventDefault();
+			if (scrollPosition < 50) {
+				// If top of the page, scroll down
+				$('html, body').animate({ scrollTop: $(document).height() - $(window).height() }, 1000);
+			} else {
+				// If not top of the page, scroll up
+				$('html, body').animate({ scrollTop: 0 }, 1000);
+			}
+		});
+
+		function checkScrollPosition(scrollPosition) {
+			if (scrollPosition < 50) {
+				// If top of the page, show down arrow
+				$('#arrowIcon').removeClass('bi-arrow-up');
+				$('#arrowIcon').addClass('bi-arrow-down');
+			} else {
+				// If not top of the page, show up arrow
+				$('#arrowIcon').removeClass('bi-arrow-down');
+				$('#arrowIcon').addClass('bi-arrow-up');
+			}
+		}
+	});
+</script>
