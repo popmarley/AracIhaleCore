@@ -106,7 +106,7 @@ namespace AracIhale.UI.Controllers
         }
 
 		[HttpPost]
-		public async Task<IActionResult> Listele(IhaleListesiVM ihale, string ihaleAdi, int aracTuru, int aracDurumu)
+		public async Task<IActionResult> Listele(IhaleListesiVM ihale, string ihaleAdi, int aracTuru, int aracDurumu, int page = 1, int pageSize = 3)
 		{
 			List<IhaleListesiVM> ihaleler = await _apiGateway.ListIhale();
 
@@ -125,10 +125,11 @@ namespace AracIhale.UI.Controllers
 				ihaleler = ihaleler.Where(i => i.IhaleStatuID == aracDurumu).ToList();
 			}
 
-			return View("AracListeleme", ihaleler);
-        }
+			var pagedIhaleler = ihaleler.ToPagedList(page, pageSize);
+			return View("AracListeleme", pagedIhaleler);
+		}
 
-        [HttpPost]
+		[HttpPost]
         public async Task<IActionResult> IhaleListeFiltrele(IhaleListesiVM ihale, string ihaleAdi, int aracTuru, int aracDurumu)
         {
             List<IhaleListesiVM> ihaleler = await _apiGateway.ListIhale();
