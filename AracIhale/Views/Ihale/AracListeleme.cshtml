@@ -1,9 +1,13 @@
-﻿@model IEnumerable<AracIhale.UI.Models.VM.IhaleListesiVM>
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Web.Common;
+
+@model X.PagedList.IPagedList<AracIhale.UI.Models.VM.IhaleListesiVM>
 @{
 	
 }
 
-
+<br />
 <form class="bg-white rounded p-3" action="@Url.Action("Listele", "Ihale")" method="post">
 	<h4 style="color:dimgrey;">Kriterler</h4>
 	<div class="row">
@@ -99,7 +103,23 @@
 		}
 	</div>
 </div>
-
+<div class="text-center">
+	<div style="display: inline-block;">
+		@Html.PagedListPager((IPagedList)Model,
+		page => Url.Action("AracListeleme", new { page }),
+		new PagedListRenderOptions
+		{
+		DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+		DisplayLinkToLastPage = PagedListDisplayMode.Always,
+		DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+		DisplayLinkToNextPage = PagedListDisplayMode.Always,
+		LinkToFirstPageFormat = "<button class='btn btn-primary'>&laquo;</button><span>&ensp;</span>",
+		LinkToPreviousPageFormat = "<span>&ensp;</span><button class='btn btn-primary'>&lsaquo;</button><span>&ensp;</span>",
+		LinkToNextPageFormat = "<span>&ensp;</span><button class='btn btn-primary'>&rsaquo;</button><span>&ensp;</span>",
+		LinkToLastPageFormat = "<span>&ensp;</span><button class='btn btn-primary'>&raquo;</button>"
+		})
+	</div>
+</div>
 <br />
 
 <a href="@Url.Action("OnaylananTeklifler", "Ihaleteklif")" class="btn btn-success me-2">Onaylanan İhaleler</a>

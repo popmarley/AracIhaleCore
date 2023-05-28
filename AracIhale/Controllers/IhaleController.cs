@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace AracIhale.UI.Controllers
 {
@@ -18,10 +19,15 @@ namespace AracIhale.UI.Controllers
 			_apiGateway = apiGateway;
 		}
 
-		public async Task<IActionResult> AracListeleme()
+		public async Task<IActionResult> AracListeleme(int page)
 		{
+			if (page < 1)
+			{
+				page = 1; // Sayfa numarası 1'den küçükse 1 olarak ayarlanır.
+			}
 			var ihaleler = await _apiGateway.ListIhale();
-			return View(ihaleler);
+			var pagedIhaleler = ihaleler.ToPagedList(page, 3); 
+			return View(pagedIhaleler);
 		}
 
 		public IActionResult AracIhaleOlusturma()
